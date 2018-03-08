@@ -9,13 +9,18 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Point;
+import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -844,7 +849,83 @@ public class VentanaAR extends javax.swing.JFrame {
             nivelserv = 100 - ((100-confianzaGlobal)*tiempoentrega*demandaTotalAnual)/(365*cantidadEconomicaPed);
             nivelserviciocep.setText(""+nivelserv);
         }
-		
+        
+        
+        int XN = 0;
+        ArrayList<Integer> XV = new ArrayList<Integer>();
+        ArrayList<Double> CC = new ArrayList<Double>();
+        ArrayList<Double> CM = new ArrayList<Double>();
+        ArrayList<Double> CT = new ArrayList<Double>();
+        
+
+		//var datas = [];
+		//datas[0] = new Array("Q", "(CC) Costo de Compra", "(CM) Costo de Mantenimiento del Inventario", "(CT) Costo Total", "Cantidad Económica de Pedido");
+
+		for (int Q = 1; ; Q++) {            
+			XV.add(Q);
+            double mul1 = (demandaTotalAnual/Q)*costoProcesamientoPedido;
+			CC.add(mul1);
+            
+            Double d = (double)Q/2;
+            double mul2 = d.floatValue()*costoUnitario*porcentajeCosto;
+			CM.add(mul2);
+            
+            double suma = (double)CC.get(Q-1) + (double)CM.get(Q-1);
+            CT.add(suma);
+		  //datas[Q] = new Array(Q, CC[Q], CM[Q], CT[Q], 0);
+		  if (mul1 <= mul2 && (int)XN == 0) {
+		    val = Q-1;
+            Double dd = (double)Q/5+1;
+		    XN = dd.intValue()*5;
+		    XN = XN;
+		  }
+		  if (Q == (int)XN) break;
+		}
+        
+		int max = 0;
+        
+        // CREANDO TABLA
+        DefaultTableModel model = new DefaultTableModel(); 
+        JTable table = new JTable(model); 
+        table.setBounds(20, 20, 300, 400);
+        //table.setPreferredSize(new Dimension(300, 0));
+        
+        // COLUMNAS TABLA
+        model.addColumn("Q"); 
+        model.addColumn("CC"); 
+        model.addColumn("CM"); 
+        model.addColumn("CT"); 
+        
+        int numRows = 0;
+        for (int K = val+1; K >= val-8; K--) {
+			if (K==1) max = CT.get(K).intValue();
+            
+		  //if (CC[Q] == null || CM[Q] == null || CT[Q] == null) {
+		  	
+		  	//break;
+		  //}
+            
+            // AGREGANDO COLUMNAS TABLA
+            model.addRow(new Object[]{K, CC.get(K), CM.get(K), CT.get(K)});
+            numRows++;
+            if (val == K){
+                // AQUI VA EL ROW SELECCIONADO
+                table.setRowSelectionInterval(numRows-1, numRows-1);
+            }
+        }        
+        
+        // TABLE
+        ResultadosAR resultadosFrame = new ResultadosAR();
+        
+        //Create the scroll pane and add the table to it. 
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBounds(20, 60, 300, 130);
+        
+        //Add the scroll pane to this window.
+        resultadosFrame.add(scrollPane, BorderLayout.CENTER);
+        resultadosFrame.setVisible(true);
+        
+        resultadosFrame.show();		
     }
     
     private void PORCENTAJE_COSTOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PORCENTAJE_COSTOActionPerformed

@@ -16,8 +16,11 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -583,43 +586,58 @@ public class VentanaBR extends javax.swing.JFrame {
             //poissoni = [];
             //poissona = [];
             //XV = [];
+            ArrayList<Integer> XV = new ArrayList<Integer>();
+            ArrayList<Double> poissoni = new ArrayList<Double>();
+            ArrayList<Double> poissona = new ArrayList<Double>();
+            
+            
             /* datas = [];
             datas[0] = new Array("Productos", "Probabilidad Individual", "Probabilidad Acumulada", "Mínimo Stock Recomendado", "Nivel de Confianza");
 
-            $("tbody").html(''); 
-
+            */
             for (int i = 0; i <= ejex; i++) {
 
-                XV[i] = i;
-                poissoni[i] = PoissonTerm(lambda, i)*100;
+                XV.add(i);
+                poissoni.add(PoissonTerm(lambda, i)*100);
 
-                if (i <= repuestosnecesarios) poissona[i] = res[i]*100;
+                if (i <= repuestosnecesarios) poissona.add((double)res.get(i)*100);
                 else {
-                    poissona[i] = poisson(i, lambda)*100;
+                    poissona.add((double)poisson(i, lambda)*100);
                     // if (recomendado == 0 && poissona[i] >= 99.9 && i > repuestosnecesarios) recomendado = i;
                 }
 
-                datas[i+1] = new Array(i, poissoni[i], poissona[i], 0, confianzarep);
-            };*/
+              //  datas[i+1] = new Array(i, poissoni[i], poissona[i], 0, confianzarep);
+            };
 
             if (recomendado == 0) {
                 recomendado = ejex;
             };
-           /* var m = 10-(ejex - repuestosnecesarios);
-            for (var i = ejex; i >= repuestosnecesarios-m; i--) {
-                text = '';
+            
+            int m = 10-(ejex - repuestosnecesarios);
+            
+            // CREANDO TABLA
+            DefaultTableModel model = new DefaultTableModel(); 
+            JTable table = new JTable(model); 
+            table.setBounds(20, 20, 300, 400);
+            //table.setPreferredSize(new Dimension(300, 0));
 
-                if (i == repuestosnecesarios) text += "<tr class='success'>";
-                else text += "<tr>";
-                text += "<td>"+i+"</td>";
-                // text += "<td>"+poissoni[i].toFixed(4)+"</td>";
-                text += "<td>"+poissona[i].toFixed(4)+"</td>";
-                text += "</tr>";
-                $("tbody").append(text);
-            };
+            // COLUMNAS TABLA
+            model.addColumn("N° Repuestos"); 
+            model.addColumn("Nivel de Confianza"); 
+            
+            int numRows = 0;
+            for (int i = ejex; i >= repuestosnecesarios-m; i--) {
+                model.addRow(new Object[]{i,poissona.get(i)});
+                numRows++;
+
+                if (i == repuestosnecesarios) {
+                    table.setRowSelectionInterval(numRows-1, numRows-1);
+                }
+                
+            }
 
 
-            var data = google.visualization.arrayToDataTable(datas);
+           /* var data = google.visualization.arrayToDataTable(datas);
 
             var options = {
                 title: 'Confiabilidad por cantidad de producto',
@@ -661,6 +679,19 @@ public class VentanaBR extends javax.swing.JFrame {
             int neces = parseInt(necesarios.getText());
             neces++;
             recomendados.setText(""+neces); 
+            
+        
+            ResultadosBR resultadosFrame = new ResultadosBR();
+
+            //Create the scroll pane and add the table to it. 
+            JScrollPane scrollPane = new JScrollPane(table);
+            scrollPane.setBounds(20, 60, 300, 180);
+
+            //Add the scroll pane to this window.
+            resultadosFrame.add(scrollPane, BorderLayout.CENTER);
+            resultadosFrame.setVisible(true);
+            
+            resultadosFrame.show();		
     }
 
     public ArrayList PoissonInverso (double confiabilidad, double lambda) {
