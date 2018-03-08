@@ -6,7 +6,12 @@
 package optim;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import static java.lang.Integer.parseInt;
+import static java.lang.Math.abs;
+import static java.lang.Math.exp;
+import static java.lang.Math.log;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JButton;
@@ -20,6 +25,8 @@ import javax.swing.WindowConstants;
  * ugueto.luis19@gmail.com
  */
 public class VentanaBR extends javax.swing.JFrame {
+    int pos = 0;
+    // names = ["partesoperando", "mtbf", "tiempoentrega", "indisp"];
     /**
      * Creates new form VentanaAR
      */
@@ -39,22 +46,33 @@ public class VentanaBR extends javax.swing.JFrame {
 
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        criticidad = new javax.swing.JLabel();
+        panelCriticidad = new javax.swing.JPanel();
+        criticidadLabel = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
+        confianzaBR = new javax.swing.JTextField();
+        jLabel30 = new javax.swing.JLabel();
+        confianzad = new javax.swing.JTextField();
+        jLabel31 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        necesarios = new javax.swing.JTextField();
+        jLabel33 = new javax.swing.JLabel();
+        recomendados = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
         jLabel24 = new javax.swing.JLabel();
-        porcentajeUnitItem = new javax.swing.JTextField();
         partesIgualesOperandoSimult = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         mttf = new javax.swing.JTextField();
-        consecuenciaIndisponibilidad = new javax.swing.JTextField();
         jLabel27 = new javax.swing.JLabel();
         procesar = new javax.swing.JButton();
         clear = new javax.swing.JButton();
+        consecuenciaIndisponibilidad = new javax.swing.JComboBox<String>();
+        tiempoEntrega = new javax.swing.JTextField();
+        jLabel29 = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(600, 480));
@@ -65,71 +83,142 @@ public class VentanaBR extends javax.swing.JFrame {
         jLabel3.setMaximumSize(new java.awt.Dimension(156, 156));
         jLabel3.setMinimumSize(new java.awt.Dimension(156, 156));
 
-        criticidad.setBackground(new java.awt.Color(204, 204, 204));
-        criticidad.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        criticidad.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        criticidad.setText("<html>CRITICIDAD");
-        criticidad.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        criticidadLabel.setBackground(new java.awt.Color(204, 204, 204));
+        criticidadLabel.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        criticidadLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        criticidadLabel.setText("<html>CRITICIDAD");
+        criticidadLabel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(criticidad, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+        javax.swing.GroupLayout panelCriticidadLayout = new javax.swing.GroupLayout(panelCriticidad);
+        panelCriticidad.setLayout(panelCriticidadLayout);
+        panelCriticidadLayout.setHorizontalGroup(
+            panelCriticidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelCriticidadLayout.createSequentialGroup()
+                .addComponent(criticidadLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(criticidad, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+        panelCriticidadLayout.setVerticalGroup(
+            panelCriticidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(criticidadLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
         );
+
+        jLabel28.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel28.setText("Criticidad del Artículo");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(153, 153, 153)
+                .addGap(176, 176, 176)
                 .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelCriticidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jLabel28)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addComponent(jLabel28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelCriticidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(172, Short.MAX_VALUE))
         );
 
+        confianzaBR.setEditable(false);
+        confianzaBR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confianzaBRActionPerformed(evt);
+            }
+        });
+
+        jLabel30.setText("Nivel de confianza para los datos ingresados:");
+
+        confianzad.setEditable(false);
+        confianzad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confianzadActionPerformed(evt);
+            }
+        });
+
+        jLabel31.setText("Nivel de Confianza Deseado:");
+
+        jLabel32.setText("Stock mínimo recomendado:");
+
+        necesarios.setEditable(false);
+        necesarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                necesariosActionPerformed(evt);
+            }
+        });
+
+        jLabel33.setText("Stock máximo recomendado:");
+
+        recomendados.setEditable(false);
+        recomendados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                recomendadosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 474, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jLabel31, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel32, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(recomendados, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(necesarios, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(confianzaBR, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(confianzad, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(96, 96, 96))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 482, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(confianzad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(confianzaBR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel32)
+                    .addComponent(necesarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(recomendados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel23.setText("Cálculo del Nivel de Inventarios para Repuestos de Baja Rotación");
 
         jLabel24.setText("Partes iguales operando simultaneamente:");
-
-        porcentajeUnitItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                porcentajeUnitItemActionPerformed(evt);
-            }
-        });
 
         jLabel25.setText("Tiempo Medio para Fallar Mean Time to Failure (MTTF):");
 
@@ -151,43 +240,52 @@ public class VentanaBR extends javax.swing.JFrame {
             }
         });
 
+        consecuenciaIndisponibilidad.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "No afecta la producción", "Afecta parcialmente la producción", "Paraliza totalmente la producción" }));
+
+        tiempoEntrega.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tiempoEntregaActionPerformed(evt);
+            }
+        });
+
+        jLabel29.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel29.setText("Resultados");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel23)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(jSeparator4)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel26, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel25))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addGap(56, 56, 56)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                .addGap(116, 116, 116)
+                                .addComponent(procesar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(clear))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel29)
+                                    .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel25, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
+                                    .addComponent(jLabel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel27, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel24, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel27, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(24, 24, 24)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(mttf, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(partesIgualesOperandoSimult, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(consecuenciaIndisponibilidad, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(porcentajeUnitItem, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 39, Short.MAX_VALUE)))
+                                    .addComponent(partesIgualesOperandoSimult, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(consecuenciaIndisponibilidad, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tiempoEntrega, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(mttf, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(116, 116, 116)
-                .addComponent(procesar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(clear)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -206,17 +304,18 @@ public class VentanaBR extends javax.swing.JFrame {
                     .addComponent(mttf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel26)
-                    .addComponent(consecuenciaIndisponibilidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(consecuenciaIndisponibilidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel26))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(porcentajeUnitItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                    .addComponent(tiempoEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(procesar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(clear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(46, 46, 46))
+                .addGap(21, 21, 21)
+                .addComponent(jLabel29))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -226,43 +325,66 @@ public class VentanaBR extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 478, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 172, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void procesarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_procesarActionPerformed
+    private void confianzaBRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confianzaBRActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_procesarActionPerformed
+    }//GEN-LAST:event_confianzaBRActionPerformed
 
-    private void porcentajeUnitItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_porcentajeUnitItemActionPerformed
+    private void confianzadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confianzadActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_porcentajeUnitItemActionPerformed
+    }//GEN-LAST:event_confianzadActionPerformed
+
+    private void necesariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_necesariosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_necesariosActionPerformed
+
+    private void recomendadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recomendadosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_recomendadosActionPerformed
+
+    private void tiempoEntregaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tiempoEntregaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tiempoEntregaActionPerformed
 
     private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_clearActionPerformed
+
+    private void procesarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_procesarActionPerformed
+        // TODO add your handling code here:
+        graficarBR();
+    }//GEN-LAST:event_procesarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -299,25 +421,421 @@ public class VentanaBR extends javax.swing.JFrame {
             }
         });
     }
+    
+    public boolean validar () {
+        
+        if (partesIgualesOperandoSimult.getText().isEmpty() || partesIgualesOperandoSimult.getText() == null) {
+            return false;
+        }
+        if (mttf.getText().isEmpty() || mttf.getText() == null) {
+            return false;
+        }
+        if (confianzaBR.getText().isEmpty() || confianzaBR.getText() == null) {
+            return false;
+        }
+        return true;
+    }
+    
+    public int criticidad (int indisponibilidad, float tiempo) {
+        int criticidad=-1;
+        if (tiempo == 0 || indisponibilidad == 0) criticidad = 0;
+        if (tiempo > 0 && tiempo < 10) {
+            switch(indisponibilidad) {
+                case 1: case 3: criticidad=1; break;
+                case 5: criticidad=3; break; 
+            }
+        };
+        if (tiempo >= 10 && tiempo <= 30) {
+            switch(indisponibilidad) {
+                case 1: criticidad = 1; break;
+                case 3: criticidad = 3; break;
+                case 5: criticidad = 5; break;
+            }
+        };
+        if (tiempo > 30) {
+            switch(indisponibilidad) {
+                case 1: criticidad = 3; break;
+                case 3: case 5: criticidad = 5; break;
+            }
+        };
+        return criticidad;
+    }
+    
+    public boolean procesarBR () {
+        //if (validar()) {
+            int partesoperando = parseInt(partesIgualesOperandoSimult.getText());
+            int mtbf = parseInt(mttf.getText());
+            float tiempoentrega = parseInt(tiempoEntrega.getText());
+            int consecuencia = 0;
+
+            if (partesoperando < 0 || mtbf < 0 || tiempoentrega < 0) {
+                //error("Todos los campos deben ser positivos");
+            }
+            if(consecuenciaIndisponibilidad.getSelectedItem().toString().equalsIgnoreCase("No afecta la producción"))
+            {
+                consecuencia = 1;
+            }
+            if(consecuenciaIndisponibilidad.getSelectedItem().toString().equalsIgnoreCase("Afecta parcialmente la producción"))
+            {
+                consecuencia = 3;
+            }
+            if(consecuenciaIndisponibilidad.getSelectedItem().toString().equalsIgnoreCase("Paraliza totalmente la producción"))
+            {
+                consecuencia = 5;
+            }
+
+            int indisponibilidad = consecuencia;
+            int crit = criticidad(indisponibilidad, tiempoentrega);
+            int confianzadeseada;
+
+            switch (crit) {
+                case 1: confianzadeseada = 80; break;
+                case 3: confianzadeseada = 90; break;
+                case 5: confianzadeseada = 99; break;
+                default: confianzadeseada = 80; break;
+            }
+
+            if (confianzadeseada > 100 || confianzadeseada < 0) {
+            //	error("La confianza deseada debe ser un valor entre 0 y 100.");
+                return false;
+            }
+
+            int pos = 0;
+            float lambda = partesoperando*(tiempoentrega*24/mtbf);
+            
+            ArrayList resultados = PoissonInverso(confianzadeseada, lambda);
+
+            int repuestosnecesarios = (int) resultados.get(0);
+            ArrayList array = (ArrayList) resultados.get(1);
+            
+            double confianzarep = (double)array.get(array.size()-1)*100; 
+            
+            float division = repuestosnecesarios/10;
+            int ejex = (int) ((division+1)*10);
+
+            confianzad.setText(""+confianzadeseada);
+            necesarios.setText(""+repuestosnecesarios);
+            confianzaBR.setText(""+confianzarep);
+
+            uptcrit(crit);
+            
+            return true;
+        //}
+        //return false;
+    }
+
+    
+    public void uptcrit (int criticidad) {
+        String texto=""; int valor=0;
+
+        if (criticidad == 5) {
+            texto = "Alta";
+            panelCriticidad.setBackground(Color.RED);
+            // valor = 100;
+        }
+        else if (criticidad == 3) {
+            texto = "Media";
+            panelCriticidad.setBackground(Color.ORANGE);
+            // valor = 60;
+        }
+        else if (criticidad == 1) {
+            texto = "Baja";
+            panelCriticidad.setBackground(Color.GREEN);
+            // valor = 30;
+        }
+
+        criticidadLabel.setText(texto);
+        
+    }
+    
+    public void graficarBR () {
+        
+        procesarBR();
+
+            int partesoperando = parseInt(partesIgualesOperandoSimult.getText());
+            int mtbf = parseInt(mttf.getText());
+            int tiempoentrega = parseInt(tiempoEntrega.getText());
+            double confianzadeseada = (double)parseInt(confianzad.getText());
+            double confiabilidad = confianzadeseada;
+
+            double lambda = partesoperando*(tiempoentrega*24/mtbf);
+
+            int j=0; boolean control = false; ArrayList res = new ArrayList(); boolean marca[] = null;
+
+            while(!control){
+                res.add(j, poisson(j, lambda));
+                if (confianzadeseada/100 <= (double)res.get(j)) {
+                    control = true;
+                    // marca[j] = res[j];
+                    // marca[j+1] = res[j]*100;
+                } else {
+                    //marca[j] = null;
+                    j++;
+                }
+            }
+
+            int repuestosnecesarios = j;
+            double confianzarep = (double)res.get(j)*100; 
+            double division = repuestosnecesarios/10;
+            int ejex = (int) ((division+1)*10);
+
+            int min = 0, max = 100, recomendado=0;
+            //poissoni = [];
+            //poissona = [];
+            //XV = [];
+            /* datas = [];
+            datas[0] = new Array("Productos", "Probabilidad Individual", "Probabilidad Acumulada", "Mínimo Stock Recomendado", "Nivel de Confianza");
+
+            $("tbody").html(''); 
+
+            for (int i = 0; i <= ejex; i++) {
+
+                XV[i] = i;
+                poissoni[i] = PoissonTerm(lambda, i)*100;
+
+                if (i <= repuestosnecesarios) poissona[i] = res[i]*100;
+                else {
+                    poissona[i] = poisson(i, lambda)*100;
+                    // if (recomendado == 0 && poissona[i] >= 99.9 && i > repuestosnecesarios) recomendado = i;
+                }
+
+                datas[i+1] = new Array(i, poissoni[i], poissona[i], 0, confianzarep);
+            };*/
+
+            if (recomendado == 0) {
+                recomendado = ejex;
+            };
+           /* var m = 10-(ejex - repuestosnecesarios);
+            for (var i = ejex; i >= repuestosnecesarios-m; i--) {
+                text = '';
+
+                if (i == repuestosnecesarios) text += "<tr class='success'>";
+                else text += "<tr>";
+                text += "<td>"+i+"</td>";
+                // text += "<td>"+poissoni[i].toFixed(4)+"</td>";
+                text += "<td>"+poissona[i].toFixed(4)+"</td>";
+                text += "</tr>";
+                $("tbody").append(text);
+            };
+
+
+            var data = google.visualization.arrayToDataTable(datas);
+
+            var options = {
+                title: 'Confiabilidad por cantidad de producto',
+                titleTextStyle: {
+                  fontSize: 16
+                },
+                curveType: 'function',
+                legend: { position: 'right' },
+                hAxis: {
+                    title: 'Cantidad de repuestos',
+                    gridlines: {
+                        count: ejex+1
+                    }
+                },
+                vAxis: {
+                    title: 'Nivel de Confianza (%)'
+                },
+                lineWidth: 4,
+                series: {
+                    2: {
+                        lineWidth: 1,
+                    },
+                    3: {
+                        lineDashStyle: [10, 4]
+                    }
+                },
+                colors: ['blue', 'red', 'black', 'purple'],
+                chartArea: { height: '80%',
+                             width: '65%' },
+                crosshair: { trigger: 'selection',
+                             orientation: 'vertical',
+                             color: 'black' }
+            };
+
+            var chart = new google.visualization.LineChart($('.poisson_chart')[0]);
+
+            chart.draw(data, options);
+            chart.setSelection([{'row':repuestosnecesarios, 'column':2}]); */            
+            int neces = parseInt(necesarios.getText());
+            neces++;
+            recomendados.setText(""+neces); 
+    }
+
+    public ArrayList PoissonInverso (double confiabilidad, double lambda) {
+        int i=0; boolean control = false; ArrayList res = new ArrayList();
+        
+        while(!control){
+            res.add("");
+            res.set(i, poisson(i, lambda)); 
+            
+            if ((double)confiabilidad/100 <= (double)res.get(i)) { // i, lambda, true?
+                control = true;
+            } else {
+                i++;
+            }
+        }
+        ArrayList arr = new ArrayList();
+        arr.add(i);
+        arr.add(res);
+        return arr;
+    }
+
+    public double LogGamma(double Z) {
+		double S=1+76.18009173/Z-86.50532033/(Z+1)+24.01409822/(Z+2)-1.231739516/(Z+3)+.00120858003/(Z+4)-.00000536382/(Z+5);
+		double LG= (Z-.5)*Math.log(Z+4.5)-(Z+4.5)+Math.log(S*2.50662827465);
+        return LG;
+    }
+
+    public double Gcf(double X,double A) {        // Good for X>A+1
+	
+		double A0=0;
+		double B0=1;
+		double A1=1;
+		double B1=X;
+		double AOLD=0;
+		double N=0;
+		while (Math.abs((A1-AOLD)/A1)>.00001) {
+			AOLD=A1;
+			N=N+1;
+			A0=A1+(N-A)*A0;
+			B0=B1+(N-A)*B0;
+			A1=X*A0+N*A1;
+			B1=X*B0+N*B1;
+			A0=A0/B1;
+			B0=B0/B1;
+			A1=A1/B1;
+			B1=1;
+		}
+		double Prob=Math.exp(A*Math.log(X)-X-LogGamma(A))*A1;
+        
+        return 1-Prob;
+    }
+
+    public double Gser(double X,double A) {        // Good for X<A+1.
+		double T9=1/A;
+		double G=T9;
+		double I=1;
+		while (T9>G*.00001) {
+			T9=T9*X/(A+I);
+			G=G+T9;
+			I=I+1;
+		}
+		G=G*Math.exp(A*Math.log(X)-X-LogGamma(A));
+        
+        return G;
+    }
+
+    public double Gammacdf(double x, double a) {
+        double GI;
+        if (x<=0) {
+            GI=0;
+        } else if (x<a+1) {
+            GI=Gser(x,a);
+        } else {
+            GI=Gcf(x,a);
+        }
+        
+        return GI;
+    }
+
+    public double poisson(double Z, double Lam) {
+        double Poiscdf = 0, auxPoiscdf = 0, auxZ = 0;
+        if (Lam<=0) {
+		positivo();
+        } else if (Z<0) {
+            Poiscdf=0;
+        } else {
+            auxZ = Math.floor(Z);
+            Z = auxZ;
+            Poiscdf=1-Gammacdf(Lam,Z+1);  
+        }
+        
+        double mult = Poiscdf*100000;
+        auxPoiscdf = mult/100000;
+        
+        Poiscdf=auxPoiscdf;
+        
+        return Poiscdf;
+    }
+    
+    public double Fact(double x ) {
+        // x factorial
+        int  t=1;
+        while (x > 1)
+           t *= x--;
+        return t;
+   }
+
+    public double LnFact(double x ) {
+    // ln(x!) by Stirling's formula
+    //   see Knuth I: 111
+        if (x <= 1)  x = 1;
+
+        if (x < 12)
+            return Math.log( Fact(Math.round(x)) );
+        else {
+           double invx = 1 / x;
+           double invx2 = invx * invx;
+           double invx3 = invx2 * invx;
+           double invx5 = invx3 * invx2;
+           double invx7 = invx5 * invx2;
+
+           double sum = ((x + 0.5) * Math.log(x)) - x;
+           sum += Math.log(2*Math.PI) / 2;
+           sum += (invx / 12) - (invx3 / 360);
+           sum += (invx5 / 1260) - (invx7 / 1680);
+
+           return sum;
+        }
+    }
+
+    public double PoissonTerm(double u, double k) {
+        // by logs
+        return  Math.exp( (k * Math.log(u)) - u - LnFact(k) );
+   }
+
+    public boolean positivo () {
+
+        if (pos == 0) {
+            //error("Lambda debe ser positivo.");
+            pos = 1;
+            return true;
+        }
+        return false;
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton clear;
-    private javax.swing.JTextField consecuenciaIndisponibilidad;
-    private javax.swing.JLabel criticidad;
+    private javax.swing.JTextField confianzaBR;
+    private javax.swing.JTextField confianzad;
+    private javax.swing.JComboBox<String> consecuenciaIndisponibilidad;
+    private javax.swing.JLabel criticidadLabel;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JTextField mttf;
+    private javax.swing.JTextField necesarios;
+    private javax.swing.JPanel panelCriticidad;
     private javax.swing.JTextField partesIgualesOperandoSimult;
-    private javax.swing.JTextField porcentajeUnitItem;
     private javax.swing.JButton procesar;
+    private javax.swing.JTextField recomendados;
+    private javax.swing.JTextField tiempoEntrega;
     // End of variables declaration//GEN-END:variables
 }
