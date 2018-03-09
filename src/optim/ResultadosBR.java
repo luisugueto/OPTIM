@@ -9,10 +9,10 @@ import javax.swing.WindowConstants;
 
 /**
  *
- * @author Ypsis
+ * @author Luis Ugueto
+ * ugueto.luis19@gmail.com
  */
 public class ResultadosBR extends javax.swing.JFrame {
-
     /**
      * Creates new form ResultadosBR
      */

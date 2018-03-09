@@ -856,10 +856,6 @@ public class VentanaAR extends javax.swing.JFrame {
         ArrayList<Double> CC = new ArrayList<Double>();
         ArrayList<Double> CM = new ArrayList<Double>();
         ArrayList<Double> CT = new ArrayList<Double>();
-        
-
-		//var datas = [];
-		//datas[0] = new Array("Q", "(CC) Costo de Compra", "(CM) Costo de Mantenimiento del Inventario", "(CT) Costo Total", "Cantidad Económica de Pedido");
 
 		for (int Q = 1; ; Q++) {            
 			XV.add(Q);
@@ -872,7 +868,6 @@ public class VentanaAR extends javax.swing.JFrame {
             
             double suma = (double)CC.get(Q-1) + (double)CM.get(Q-1);
             CT.add(suma);
-		  //datas[Q] = new Array(Q, CC[Q], CM[Q], CT[Q], 0);
 		  if (mul1 <= mul2 && (int)XN == 0) {
 		    val = Q-1;
             Double dd = (double)Q/5+1;
@@ -888,7 +883,6 @@ public class VentanaAR extends javax.swing.JFrame {
         DefaultTableModel model = new DefaultTableModel(); 
         JTable table = new JTable(model); 
         table.setBounds(20, 20, 300, 400);
-        //table.setPreferredSize(new Dimension(300, 0));
         
         // COLUMNAS TABLA
         model.addColumn("Q"); 
@@ -906,7 +900,7 @@ public class VentanaAR extends javax.swing.JFrame {
 		  //}
             
             // AGREGANDO COLUMNAS TABLA
-            model.addRow(new Object[]{K, CC.get(K), CM.get(K), CT.get(K)});
+            model.addRow(new Object[]{K+1, CC.get(K), CM.get(K), CT.get(K)});
             numRows++;
             if (val == K){
                 // AQUI VA EL ROW SELECCIONADO
@@ -914,7 +908,6 @@ public class VentanaAR extends javax.swing.JFrame {
             }
         }        
         
-        // TABLE
         ResultadosAR resultadosFrame = new ResultadosAR();
         
         //Create the scroll pane and add the table to it. 
@@ -925,7 +918,9 @@ public class VentanaAR extends javax.swing.JFrame {
         resultadosFrame.add(scrollPane, BorderLayout.CENTER);
         resultadosFrame.setVisible(true);
         
-        resultadosFrame.show();		
+        resultadosFrame.show();	
+        
+        GraficaCEP grafica = new GraficaCEP(CC, CM, CT, XN);
     }
     
     private void PORCENTAJE_COSTOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PORCENTAJE_COSTOActionPerformed
@@ -1020,19 +1015,19 @@ public class VentanaAR extends javax.swing.JFrame {
             if (children[i] instanceof JTextField){
                 String text = ((JTextField)children[i]).getText();
                 lineas++;
-                tiempoentrega += parseInt(text);
+                this.tiempoentrega += parseInt(text);
                 if(i == 0) post[2] = text;
                 else post[2] = post[2]+','+text;
             }
         }
 
         float auxTiempoEntrega;
-        auxTiempoEntrega = tiempoentrega / lineas; 
-        tiempoentrega  = auxTiempoEntrega;
+        auxTiempoEntrega = this.tiempoentrega / lineas; 
+        this.tiempoentrega  = auxTiempoEntrega;
         
-        ndap = criticidad(indisponibilidad, tiempoentrega );
+        ndap = criticidad(indisponibilidad, this.tiempoentrega );
         
-		float stockminimo = (float) (tiempoentrega*((double) sumaDemandaAnual/365));
+		float stockminimo = (float)(this.tiempoentrega*((double) sumaDemandaAnual/365));
         
         
 		float tpum = sumaDemandaAnual/12;
@@ -1051,9 +1046,8 @@ public class VentanaAR extends javax.swing.JFrame {
         
 		float stockseguridad = (stockminimo*ndap*dap)/tpum;
 		float puntope = stockminimo + stockseguridad;
-        float multiplicacionNivel = ((100-confianzaGlobal))*tiempoentrega*sumaDemandaAnual;
-		float nivelser = 100 - (multiplicacionNivel/(cp*365));
-        
+		float nivelser = 100 - ((100-this.confianzaGlobal)*this.tiempoentrega*sumaDemandaAnual)/(cp*365);
+
 		/*if (isNaN(puntopedido.toFixed(2))) {
 			puntopedido = "Error";
 		//	error("Verifique los datos ingresados.");
@@ -1072,9 +1066,24 @@ public class VentanaAR extends javax.swing.JFrame {
         demandaAnual.setText(""+(int)sumaDemandaAnual);
         DEMANDA_TOTAL_ANUAL.setText(""+(int)sumaDemandaAnual);
 
-		uptcrit(ndap);
-		//if (names.indexOf("lineas") == -1) names.push("lineas");
-		//fillCookies(names);
+		uptcrit(ndap);        
+		
+        // Grafico PDP en función al Nivel de confianza
+		double ppmin= ((stockminimo * 0 * dap)/tpum) + stockminimo;
+		double ppmax= ((stockminimo * 5 * dap)/tpum) + stockminimo;
+        
+       // GraficoPDPNivelConfianza graficoNC = new GraficoPDPNivelConfianza(ppmin, ppmax, this.confianzaGlobal);
+        
+        // Grafico Nivel de Servicio en función del nivel de Confianza
+        float nsmin = 100 - ((100-80)*sumaDemandaAnual*this.tiempoentrega)/(cp*365);
+		if (nsmin > 1) nsmin -= 2;
+
+        float nsmax = (float) (100 - ((100-99.99)*sumaDemandaAnual*this.tiempoentrega)/(cp*365));
+        
+        // GraficoNivelServicioNC nivelServicioNC = new GraficoNivelServicioNC(nsmin, nsmax, this.confianzaGlobal, nivelser);
+        
+        // Grafico Nivel de Servicio en función al tiempo de entrega
+        GraficoNivelServicioTiempoEntrega graficoTE = new GraficoNivelServicioTiempoEntrega(ppmin, ppmax, nivelser, this.tiempoentrega);
 
     }
     

@@ -9,7 +9,8 @@ import javax.swing.WindowConstants;
 
 /**
  *
- * @author Ypsis
+ * @author Luis Ugueto
+ * ugueto.luis19@gmail.com
  */
 public class ResultadosAR extends javax.swing.JFrame {
 

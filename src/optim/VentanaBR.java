@@ -29,7 +29,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class VentanaBR extends javax.swing.JFrame {
     int pos = 0;
-    // names = ["partesoperando", "mtbf", "tiempoentrega", "indisp"];
     /**
      * Creates new form VentanaAR
      */
@@ -583,18 +582,10 @@ public class VentanaBR extends javax.swing.JFrame {
             int ejex = (int) ((division+1)*10);
 
             int min = 0, max = 100, recomendado=0;
-            //poissoni = [];
-            //poissona = [];
-            //XV = [];
             ArrayList<Integer> XV = new ArrayList<Integer>();
             ArrayList<Double> poissoni = new ArrayList<Double>();
             ArrayList<Double> poissona = new ArrayList<Double>();
             
-            
-            /* datas = [];
-            datas[0] = new Array("Productos", "Probabilidad Individual", "Probabilidad Acumulada", "Mínimo Stock Recomendado", "Nivel de Confianza");
-
-            */
             for (int i = 0; i <= ejex; i++) {
 
                 XV.add(i);
@@ -633,54 +624,12 @@ public class VentanaBR extends javax.swing.JFrame {
                 if (i == repuestosnecesarios) {
                     table.setRowSelectionInterval(numRows-1, numRows-1);
                 }
-                
             }
 
-
-           /* var data = google.visualization.arrayToDataTable(datas);
-
-            var options = {
-                title: 'Confiabilidad por cantidad de producto',
-                titleTextStyle: {
-                  fontSize: 16
-                },
-                curveType: 'function',
-                legend: { position: 'right' },
-                hAxis: {
-                    title: 'Cantidad de repuestos',
-                    gridlines: {
-                        count: ejex+1
-                    }
-                },
-                vAxis: {
-                    title: 'Nivel de Confianza (%)'
-                },
-                lineWidth: 4,
-                series: {
-                    2: {
-                        lineWidth: 1,
-                    },
-                    3: {
-                        lineDashStyle: [10, 4]
-                    }
-                },
-                colors: ['blue', 'red', 'black', 'purple'],
-                chartArea: { height: '80%',
-                             width: '65%' },
-                crosshair: { trigger: 'selection',
-                             orientation: 'vertical',
-                             color: 'black' }
-            };
-
-            var chart = new google.visualization.LineChart($('.poisson_chart')[0]);
-
-            chart.draw(data, options);
-            chart.setSelection([{'row':repuestosnecesarios, 'column':2}]); */            
             int neces = parseInt(necesarios.getText());
             neces++;
             recomendados.setText(""+neces); 
             
-        
             ResultadosBR resultadosFrame = new ResultadosBR();
 
             //Create the scroll pane and add the table to it. 
@@ -692,6 +641,8 @@ public class VentanaBR extends javax.swing.JFrame {
             resultadosFrame.setVisible(true);
             
             resultadosFrame.show();		
+            
+            GraficaBR grafica = new GraficaBR(poissoni, poissona, 0,confianzarep);
     }
 
     public ArrayList PoissonInverso (double confiabilidad, double lambda) {
