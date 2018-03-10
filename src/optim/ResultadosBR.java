@@ -37,7 +37,7 @@ public class ResultadosBR extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         nivelDeseado.setText(""+confianzadeseada);
-        nivelConfianzaDatos.setText(""+confianzadatosingresados);
+        nivelConfianzaDatos.setText(""+Math.round(confianzadatosingresados * 100d) / 100d  );
         stockMinimo.setText(""+stockminimo);
         stockMaximo.setText(""+stockmaximo);
         
@@ -56,7 +56,7 @@ public class ResultadosBR extends javax.swing.JFrame {
           
         int numRows = 0;
         for (int i = ejex; i >= repuestosnecesarios-m; i--) {
-            model.addRow(new Object[]{i,poissona.get(i)});
+            model.addRow(new Object[]{i, Math.round((double)poissona.get(i) * 100d) / 100d });
             numRows++;
             if (i == repuestosnecesarios) {
                 table.setRowSelectionInterval(numRows-1, numRows-1);

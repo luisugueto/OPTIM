@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -31,7 +32,7 @@ public class VentanaAR extends javax.swing.JFrame {
     private List<JTextField> jTextFields;
     private int indice;
     private int x = 70, y = 55;
-    private float confianzaGlobal = 0, tiempoentrega;
+    private float confianzaGlobal = 0, tiempoentrega = 0;
     private float cantidadEconPedido, tiempoPed,  pedidosAnio,  costoCompra,  costoMantInventario, costoAnual, nivelServicioCEP;
     
     /**
@@ -137,28 +138,99 @@ public class VentanaAR extends javax.swing.JFrame {
                 m1ActionPerformed(evt);
             }
         });
+        m1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                m1KeyTyped(evt);
+            }
+        });
 
         jLabel5.setText("Enero");
 
         jLabel6.setText("Febrero");
 
+        m2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                m2KeyTyped(evt);
+            }
+        });
+
         jLabel7.setText("Marzo");
+
+        m3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                m3KeyTyped(evt);
+            }
+        });
+
+        m4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                m4KeyTyped(evt);
+            }
+        });
 
         jLabel8.setText("Abril");
 
         jLabel9.setText("Mayo");
 
+        m5.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                m5KeyTyped(evt);
+            }
+        });
+
         jLabel10.setText("Junio");
+
+        m6.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                m6KeyTyped(evt);
+            }
+        });
+
+        m7.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                m7KeyTyped(evt);
+            }
+        });
 
         jLabel11.setText("Julio");
 
+        m8.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                m8KeyTyped(evt);
+            }
+        });
+
         jLabel12.setText("Agosto");
+
+        m9.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                m9KeyTyped(evt);
+            }
+        });
 
         jLabel13.setText("Septiembre");
 
         jLabel14.setText("Octubre");
 
+        m10.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                m10KeyTyped(evt);
+            }
+        });
+
         jLabel15.setText("Noviembre");
+
+        m11.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                m11KeyTyped(evt);
+            }
+        });
+
+        m12.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                m12KeyTyped(evt);
+            }
+        });
 
         jLabel16.setText("Diciembre");
 
@@ -179,6 +251,11 @@ public class VentanaAR extends javax.swing.JFrame {
         t0.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 t0ActionPerformed(evt);
+            }
+        });
+        t0.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                t0KeyTyped(evt);
             }
         });
 
@@ -241,6 +318,12 @@ public class VentanaAR extends javax.swing.JFrame {
         });
 
         jLabel22.setText("Cantidad comprada por pedido");
+
+        cantidadCompradaItem.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                cantidadCompradaItemKeyTyped(evt);
+            }
+        });
 
         procesarPunto.setText("Procesar");
         procesarPunto.addActionListener(new java.awt.event.ActionListener() {
@@ -461,10 +544,33 @@ public class VentanaAR extends javax.swing.JFrame {
                 PORCENTAJE_COSTOActionPerformed(evt);
             }
         });
+        PORCENTAJE_COSTO.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                PORCENTAJE_COSTOKeyTyped(evt);
+            }
+        });
+
+        DEMANDA_TOTAL_ANUAL.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                DEMANDA_TOTAL_ANUALKeyTyped(evt);
+            }
+        });
 
         jLabel25.setText("Costo unitario de cada artículo:");
 
         jLabel26.setText("Costo de procesamiento de cada pedido:");
+
+        COSTO_UNITARIO.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                COSTO_UNITARIOKeyTyped(evt);
+            }
+        });
+
+        COSTO_PROCESAMIENTO_PEDIDO.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                COSTO_PROCESAMIENTO_PEDIDOKeyTyped(evt);
+            }
+        });
 
         jLabel27.setText("Porcentaje del costo unitario del artículo:");
 
@@ -615,100 +721,125 @@ public class VentanaAR extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void procesarCEP(){
-        int demandaTotalAnual;
-        float costoProcesamientoPedido, costoUnitario, porcentajeCosto, porcentajeCostoFinal;
-        
-		demandaTotalAnual = (int)parseInt(""+DEMANDA_TOTAL_ANUAL.getText());
-        
-		costoProcesamientoPedido = (float)parseInt(""+COSTO_PROCESAMIENTO_PEDIDO.getText());
-        
-		costoUnitario = (float)parseInt(""+COSTO_UNITARIO.getText());
-		porcentajeCosto = (float)parseInt(""+PORCENTAJE_COSTO.getText());
+    public boolean validarCEP(){
+        if(DEMANDA_TOTAL_ANUAL.getText().isEmpty() || DEMANDA_TOTAL_ANUAL.getText() == null){
+            JOptionPane.showMessageDialog(null, "No puede dejar los campos vacíos!");   
+            return false;
+        }
+        if(COSTO_UNITARIO.getText().isEmpty() || COSTO_UNITARIO.getText() == null){
+            JOptionPane.showMessageDialog(null, "No puede dejar los campos vacíos!");   
+            return false;
+        }
+        if(COSTO_PROCESAMIENTO_PEDIDO.getText().isEmpty() || COSTO_PROCESAMIENTO_PEDIDO.getText() == null){
+            JOptionPane.showMessageDialog(null, "No puede dejar los campos vacíos!");   
+            return false;
+        }
+        if(PORCENTAJE_COSTO.getText().isEmpty() || PORCENTAJE_COSTO.getText() == null){
+            JOptionPane.showMessageDialog(null, "No puede dejar los campos vacíos!");   
+            return false;
+        }
+        return true;
+    }
+    public boolean procesarCEP(){
+        if(validarCEP()){
+            int demandaTotalAnual;
+            float costoProcesamientoPedido, costoUnitario, porcentajeCosto, porcentajeCostoFinal;
 
-		porcentajeCosto = porcentajeCosto/100;
-		float cantidadEconomicaPe = (float) Math.sqrt(( 2 * demandaTotalAnual * costoProcesamientoPedido ) / (porcentajeCosto * costoUnitario));
+            demandaTotalAnual = (int)parseInt(""+DEMANDA_TOTAL_ANUAL.getText());
 
-		float pedidosAnual = demandaTotalAnual / cantidadEconomicaPe;
-		float tiempoEntrePe = 365 / pedidosAnual;
-		float costoDeComp = (demandaTotalAnual / cantidadEconomicaPe) * costoProcesamientoPedido;
-		float costoMantenerInv = (cantidadEconomicaPe/2) * costoUnitario * porcentajeCosto;
-		float costoTotalA = costoDeComp + costoMantenerInv;
-		porcentajeCostoFinal = porcentajeCosto*100;
+            costoProcesamientoPedido = (float)parseInt(""+COSTO_PROCESAMIENTO_PEDIDO.getText());
 
-        this.cantidadEconPedido = cantidadEconomicaPe;
-        this.pedidosAnio = pedidosAnual;
-        this.tiempoPed = tiempoEntrePe;
-        this.costoCompra = costoDeComp;
-        this.costoMantInventario = costoMantenerInv;
-        this.costoAnual = costoTotalA;
-        
+            costoUnitario = parseFloat(""+COSTO_UNITARIO.getText());
+            porcentajeCosto = parseFloat(""+PORCENTAJE_COSTO.getText());
+
+            porcentajeCosto = porcentajeCosto/100;
+            float cantidadEconomicaPe = (float) Math.sqrt(( 2 * demandaTotalAnual * costoProcesamientoPedido ) / (porcentajeCosto * costoUnitario));
+
+            float pedidosAnual = demandaTotalAnual / cantidadEconomicaPe;
+            float tiempoEntrePe = 365 / pedidosAnual;
+            float costoDeComp = (demandaTotalAnual / cantidadEconomicaPe) * costoProcesamientoPedido;
+            float costoMantenerInv = (cantidadEconomicaPe/2) * costoUnitario * porcentajeCosto;
+            float costoTotalA = costoDeComp + costoMantenerInv;
+            porcentajeCostoFinal = porcentajeCosto*100;
+
+            this.cantidadEconPedido = cantidadEconomicaPe;
+            this.pedidosAnio = pedidosAnual;
+            this.tiempoPed = tiempoEntrePe;
+            this.costoCompra = costoDeComp;
+            this.costoMantInventario = costoMantenerInv;
+            this.costoAnual = costoTotalA;
+            
+            return true;
+        }else
+            return false;
     }
     
-    public void graficarCEP(){
-        procesarCEP();
+    public boolean graficarCEP(){
+        if(procesarCEP()){
+            int val =0;
+            float demandaTotalAnual, costoProcesamientoPedido, costoUnitario, porcentajeCosto;
 
-		int val =0;
-        float demandaTotalAnual, costoProcesamientoPedido, costoUnitario, porcentajeCosto;
-		
-		demandaTotalAnual = (float)parseInt(DEMANDA_TOTAL_ANUAL.getText());
-		costoProcesamientoPedido = (float)parseInt(COSTO_PROCESAMIENTO_PEDIDO.getText());
-		costoUnitario = (float)parseInt(COSTO_UNITARIO.getText());
-		porcentajeCosto = (float)parseInt(PORCENTAJE_COSTO.getText());
+            demandaTotalAnual = parseFloat(DEMANDA_TOTAL_ANUAL.getText());
+            costoProcesamientoPedido = parseFloat(COSTO_PROCESAMIENTO_PEDIDO.getText());
+            costoUnitario = parseFloat(COSTO_UNITARIO.getText());
+            porcentajeCosto = parseFloat(PORCENTAJE_COSTO.getText());
 
-		porcentajeCosto = porcentajeCosto/100;
-		float cantidadEconomicaPed = (float) Math.sqrt(( 2 * demandaTotalAnual * costoProcesamientoPedido ) / (porcentajeCosto * costoUnitario));
-		float pedidosAnual = demandaTotalAnual / cantidadEconomicaPed;
-		float tiempoEntrePed = 365 / pedidosAnual;
-		float costoDeComp = (demandaTotalAnual / cantidadEconomicaPed) * costoProcesamientoPedido;
-		float costoMantenerInv = (cantidadEconomicaPed/2) * costoUnitario * porcentajeCosto;
-		float costoTotalAn = costoDeComp + costoMantenerInv;
+            porcentajeCosto = porcentajeCosto/100;
+            float cantidadEconomicaPed = (float) Math.sqrt(( 2 * demandaTotalAnual * costoProcesamientoPedido ) / (porcentajeCosto * costoUnitario));
+            float pedidosAnual = demandaTotalAnual / cantidadEconomicaPed;
+            float tiempoEntrePed = 365 / pedidosAnual;
+            float costoDeComp = (demandaTotalAnual / cantidadEconomicaPed) * costoProcesamientoPedido;
+            float costoMantenerInv = (cantidadEconomicaPed/2) * costoUnitario * porcentajeCosto;
+            float costoTotalAn = costoDeComp + costoMantenerInv;
 
-		float nivelserv = 0;
-        
-		if (confianzaGlobal == 0 || tiempoentrega == -1) {
-			System.out.println(false);
-		} else {
-            nivelserv = 100 - ((100-confianzaGlobal)*tiempoentrega*demandaTotalAnual)/(365*cantidadEconomicaPed);
-            this.nivelServicioCEP = nivelserv;
+            float nivelserv = 0;
+
+            if (confianzaGlobal == 0 || tiempoentrega == -1) {
+                JOptionPane.showMessageDialog(null, "No se ha calculado el nivel de servicio: Faltan datos del punto de pedido.");
+                return false;
+            } else {
+                nivelserv = 100 - ((100-confianzaGlobal)*tiempoentrega*demandaTotalAnual)/(365*cantidadEconomicaPed);
+                this.nivelServicioCEP = nivelserv;
+            }
+
+
+            int XN = 0;
+            ArrayList<Integer> XV = new ArrayList<Integer>();
+            ArrayList<Double> CC = new ArrayList<Double>();
+            ArrayList<Double> CM = new ArrayList<Double>();
+            ArrayList<Double> CT = new ArrayList<Double>();
+
+            for (int Q = 1; ; Q++) {            
+                XV.add(Q);
+                double mul1 = (demandaTotalAnual/Q)*costoProcesamientoPedido;
+                CC.add(mul1);
+
+                Double d = (double)Q/2;
+                double mul2 = d.floatValue()*costoUnitario*porcentajeCosto;
+                CM.add(mul2);
+
+                double suma = (double)CC.get(Q-1) + (double)CM.get(Q-1);
+                CT.add(suma);
+              if (mul1 <= mul2 && (int)XN == 0) {
+                val = Q-1;
+                Double dd = (double)Q/5+1;
+                XN = dd.intValue()*5;
+                XN = XN;
+              }
+              if (Q == (int)XN) break;
+            }
+
+            int max = 0;
+
+            ResultadosAR resultadosFrame = new ResultadosAR(this.cantidadEconPedido, this.tiempoPed, this.pedidosAnio, this.costoCompra, this.costoMantInventario, this.costoAnual, this.nivelServicioCEP, CC, CM, CT, val, XN);
+
+            //Create the scroll pane and add the table to it. 
+
+            //Add the scroll pane to this window.
+            resultadosFrame.setVisible(true);
+            resultadosFrame.show();	
         }
-        
-        
-        int XN = 0;
-        ArrayList<Integer> XV = new ArrayList<Integer>();
-        ArrayList<Double> CC = new ArrayList<Double>();
-        ArrayList<Double> CM = new ArrayList<Double>();
-        ArrayList<Double> CT = new ArrayList<Double>();
-
-		for (int Q = 1; ; Q++) {            
-			XV.add(Q);
-            double mul1 = (demandaTotalAnual/Q)*costoProcesamientoPedido;
-			CC.add(mul1);
-            
-            Double d = (double)Q/2;
-            double mul2 = d.floatValue()*costoUnitario*porcentajeCosto;
-			CM.add(mul2);
-            
-            double suma = (double)CC.get(Q-1) + (double)CM.get(Q-1);
-            CT.add(suma);
-		  if (mul1 <= mul2 && (int)XN == 0) {
-		    val = Q-1;
-            Double dd = (double)Q/5+1;
-		    XN = dd.intValue()*5;
-		    XN = XN;
-		  }
-		  if (Q == (int)XN) break;
-		}
-        
-		int max = 0;
-        
-        ResultadosAR resultadosFrame = new ResultadosAR(this.cantidadEconPedido, this.tiempoPed, this.pedidosAnio, this.costoCompra, this.costoMantInventario, this.costoAnual, this.nivelServicioCEP, CC, CM, CT, val, XN);
-        
-        //Create the scroll pane and add the table to it. 
-        
-        //Add the scroll pane to this window.
-        resultadosFrame.setVisible(true);
-        resultadosFrame.show();	
+        return true;
     }
     
     private void procesarPuntoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_procesarPuntoActionPerformed
@@ -717,158 +848,226 @@ public class VentanaAR extends javax.swing.JFrame {
         
     }//GEN-LAST:event_procesarPuntoActionPerformed
 
-    public void procesarPDP(){
-        ArrayList meses=new ArrayList();
-		ArrayList tiempos=new ArrayList();
-		float cp = parseInt(""+cantidadCompradaItem.getText());
-        int consecuencia = 0;
-        int lineas = 0;
-       
-        if(consecuenciaIndisponibilidad.getSelectedItem().toString().equalsIgnoreCase("No afecta la producción"))
-        {
-            consecuencia = 1;
+    public boolean validarPDP(){
+        if(m1.getText().isEmpty() || m1.getText() == null){
+            JOptionPane.showMessageDialog(null, "No puede dejar  el campo Enero vacío!");   
+            return false;
         }
-        if(consecuenciaIndisponibilidad.getSelectedItem().toString().equalsIgnoreCase("Afecta parcialmente la producción"))
-        {
-            consecuencia = 2;
+        if(m2.getText().isEmpty() || m2.getText() == null){
+            JOptionPane.showMessageDialog(null, "No puede dejar  el campo Febrero vacío!");   
+            return false;
         }
-        if(consecuenciaIndisponibilidad.getSelectedItem().toString().equalsIgnoreCase("Paraliza totalmente la producción"))
-        {
-            consecuencia = 4;
+        if(m3.getText().isEmpty() || m3.getText() == null){
+            JOptionPane.showMessageDialog(null, "No puede dejar  el campo Marzo vacío!");   
+            return false;
         }
-		int indisponibilidad = consecuencia;
-		int ndap;
-		float da[] = new float[12];
-        
-        String post[] = new String[3];
-        
-        post[1] = ""+indisponibilidad;
-        post[2] = ""+cp;
-        
-		switch (indisponibilidad) {
-			case 1: confianzaGlobal = 80; break;
-			case 2: confianzaGlobal = 95; break;
-			case 4: confianzaGlobal = (float) 99.9; break;
-			default: System.out.println("Error");
-                //error("Error de indisponibilidad"); break;
-            break;
-		}	
-        
-        // SUMA DE LA DEMANDA ANUAL
-        int sumaDemandaAnual = 0;
-        sumaDemandaAnual+=parseInt(""+m1.getText());
-        da[0] = (float)parseInt(""+m1.getText());
-        post[0] = ""+(float)parseInt(""+m1.getText());
-        
-        sumaDemandaAnual+=parseInt(""+m2.getText());
-        da[1] = (float)parseInt(""+m2.getText());
-        
-        sumaDemandaAnual+=parseInt(""+m3.getText());
-        da[2] = (float)parseInt(""+m3.getText());
-        
-        sumaDemandaAnual+=parseInt(""+m4.getText());
-        da[3] = (float)parseInt(""+m4.getText());
-        
-        sumaDemandaAnual+=parseInt(""+m5.getText());
-        da[4] = (float)parseInt(""+m5.getText());
-
-        sumaDemandaAnual+=parseInt(""+m6.getText());
-        da[5] = (float)parseInt(""+m6.getText());
-        
-        sumaDemandaAnual+=parseInt(""+m7.getText());
-        da[6] = (float)parseInt(""+m7.getText());
-        
-        sumaDemandaAnual+=parseInt(""+m8.getText());
-        da[7] = (float)parseInt(""+m8.getText());
-        
-        sumaDemandaAnual+=parseInt(""+m9.getText());
-        da[8] = (float)parseInt(""+m9.getText());
-        
-        sumaDemandaAnual+=parseInt(""+m10.getText());
-        da[9] = (float)parseInt(""+m10.getText());
-        
-        sumaDemandaAnual+=parseInt(""+m11.getText());
-        da[10] = (float)parseInt(""+m11.getText());
-        
-        sumaDemandaAnual+=parseInt(""+m12.getText());
-        da[11] = (float)parseInt(""+m12.getText());
-        
-        // OBTENER TEXTO DE LOS TEXT FIELDS DE TIEMPO DE ENTREGA
+        if(m4.getText().isEmpty() || m4.getText() == null){
+            JOptionPane.showMessageDialog(null, "No puede dejar  el campo Abril vacío!");   
+            return false;
+        }
+        if(m5.getText().isEmpty() || m5.getText() == null){
+            JOptionPane.showMessageDialog(null, "No puede dejar  el campo Mayo vacío!");   
+            return false;
+        }
+        if(m6.getText().isEmpty() || m6.getText() == null){
+            JOptionPane.showMessageDialog(null, "No puede dejar  el campo Junio vacío!");   
+            return false;
+        }
+        if(m7.getText().isEmpty() || m7.getText() == null){
+            JOptionPane.showMessageDialog(null, "No puede dejar  el campo Julio vacío!");   
+            return false;
+        }
+        if(m8.getText().isEmpty() || m8.getText() == null){
+            JOptionPane.showMessageDialog(null, "No puede dejar  el campo Agosto vacío!");   
+            return false;
+        }
+        if(m9.getText().isEmpty() || m9.getText() == null){
+            JOptionPane.showMessageDialog(null, "No puede dejar  el campo Septiembre vacío!");   
+            return false;
+        }
+        if(m10.getText().isEmpty() || m10.getText() == null){
+            JOptionPane.showMessageDialog(null, "No puede dejar  el campo Octubre vacío!");   
+            return false;
+        }
+        if(m11.getText().isEmpty() || m11.getText() == null){
+            JOptionPane.showMessageDialog(null, "No puede dejar  el campo Noviembre vacío!");   
+            return false;
+        }
+        if(m12.getText().isEmpty() || m12.getText() == null){
+            JOptionPane.showMessageDialog(null, "No puede dejar  el campo Diciembre vacío!");   
+            return false;
+        }
+        if(cantidadCompradaItem.getText().isEmpty() || cantidadCompradaItem.getText() == null){
+            JOptionPane.showMessageDialog(null, "No puede dejar  el campo Cantidad Comprada por pedido vacío!");   
+            return false;
+        }
+        if(!validarPedidos()){
+            JOptionPane.showMessageDialog(null, "No puede dejar los pedidos vacíos!");
+            return false;
+        }
+            
+        return true;
+    }
+    
+    public boolean validarPedidos(){
         Component[] children = panelTiempoEntrega.getComponents();
         for (int i=0;i<children.length;i++){
             if (children[i] instanceof JTextField){
                 String text = ((JTextField)children[i]).getText();
-                lineas++;
-                this.tiempoentrega += parseInt(text);
-                if(i == 0) post[2] = text;
-                else post[2] = post[2]+','+text;
+                if(!text.isEmpty()){
+                    return true;
+                }
+                else{
+                    return false;
+                }
             }
         }
+        return true;
+    }
+    
+    public boolean procesarPDP(){
+        if(validarPDP()){
+            this.tiempoentrega = 0;
+            ArrayList meses=new ArrayList();
+            ArrayList tiempos=new ArrayList();
+            int cp = parseInt(""+cantidadCompradaItem.getText());
+            int consecuencia = 0;
+            int lineas = 0;
 
-        float auxTiempoEntrega;
-        auxTiempoEntrega = this.tiempoentrega / lineas; 
-        this.tiempoentrega  = auxTiempoEntrega;
-        
-        ndap = criticidad(indisponibilidad, this.tiempoentrega );
-        
-		float stockminimo = (float)(this.tiempoentrega*((double) sumaDemandaAnual/365));
-        
-        
-		float tpum = sumaDemandaAnual/12;
-		float dap=0;
+            if(consecuenciaIndisponibilidad.getSelectedItem().toString().equalsIgnoreCase("No afecta la producción"))
+            {
+                consecuencia = 1;
+            }
+            if(consecuenciaIndisponibilidad.getSelectedItem().toString().equalsIgnoreCase("Afecta parcialmente la producción"))
+            {
+                consecuencia = 2;
+            }
+            if(consecuenciaIndisponibilidad.getSelectedItem().toString().equalsIgnoreCase("Paraliza totalmente la producción"))
+            {
+                consecuencia = 4;
+            }
+            int indisponibilidad = consecuencia;
+            int ndap;
+            float da[] = new float[12];
 
-		for (int i = 0; i < 12; i++) {
-            float auxDa = Math.abs((float)(da[i]-tpum));
-            // System.out.println("Da["+i+"]: "+da[i]);
-            da[i] = auxDa;
-			dap = dap + da[i];
-            // System.out.println("DAP in position Da["+i+"]: "+dap);
-		};
-        
-        float auxDap = dap/12;
-		dap = auxDap;
-        
-		float stockseguridad = (stockminimo*ndap*dap)/tpum;
-		float puntope = stockminimo + stockseguridad;
-		float nivelser = 100 - ((100-this.confianzaGlobal)*this.tiempoentrega*sumaDemandaAnual)/(cp*365);
+            String post[] = new String[3];
 
-		/*if (isNaN(puntopedido.toFixed(2))) {
-			puntopedido = "Error";
-		//	error("Verifique los datos ingresados.");
-		}
-		else puntopedido = puntopedido.toFixed(2);
+            post[1] = ""+indisponibilidad;
+            post[2] = ""+cp;
 
-		if (isNaN(nivelservicio.toFixed(2(100-confianzaGlobal)))) {
-			nivelservicio = "Error";
-		//	error("Verifique los datos ingresados.");
-		}
-		else */
-        //System.out.println(puntope);
-        //System.out.println(nivelser);
+            switch (indisponibilidad) {
+                case 1: confianzaGlobal = 80; break;
+                case 2: confianzaGlobal = 95; break;
+                case 4: confianzaGlobal = (float) 99.9; break;
+                default: 
+                    JOptionPane.showMessageDialog(null, "Error de indisponibilidad");
+                break;
+            }	
 
-        demandaAnual.setText(""+(int)sumaDemandaAnual);
+            // SUMA DE LA DEMANDA ANUAL
+            int sumaDemandaAnual = 0;
+            sumaDemandaAnual+=parseInt(""+m1.getText());
+            da[0] = (float)parseInt(""+m1.getText());
+            post[0] = ""+(float)parseInt(""+m1.getText());
 
-		uptcrit(ndap);     
-        
-        // Grafico PDP en función al Nivel de confianza
-		double ppmin= ((stockminimo * 0 * dap)/tpum) + stockminimo;
-		double ppmax= ((stockminimo * 5 * dap)/tpum) + stockminimo;
-        
-       // GraficoPDPNivelConfianza graficoNC = new GraficoPDPNivelConfianza(ppmin, ppmax, this.confianzaGlobal);
-        
-        // Grafico Nivel de Servicio en función del nivel de Confianza
-        float nsmin = 100 - ((100-80)*sumaDemandaAnual*this.tiempoentrega)/(cp*365);
-		if (nsmin > 1) nsmin -= 2;
+            sumaDemandaAnual+=parseInt(""+m2.getText());
+            da[1] = (float)parseInt(""+m2.getText());
 
-        float nsmax = (float) (100 - ((100-99.99)*sumaDemandaAnual*this.tiempoentrega)/(cp*365));
-        
-        // GraficoNivelServicioNC nivelServicioNC = new GraficoNivelServicioNC(nsmin, nsmax, this.confianzaGlobal, nivelser);
-        
-        // Grafico Nivel de Servicio en función al tiempo de entrega
-        // GraficoNivelServicioTiempoEntrega graficoTE = new GraficoNivelServicioTiempoEntrega(ppmin, ppmax, nivelser, this.tiempoentrega);
-        
-        ResultadosARPDP resultados = new ResultadosARPDP(puntope, nivelser, ppmin, ppmax, nsmin, nsmax,this.confianzaGlobal, this.tiempoentrega);
+            sumaDemandaAnual+=parseInt(""+m3.getText());
+            da[2] = (float)parseInt(""+m3.getText());
 
+            sumaDemandaAnual+=parseInt(""+m4.getText());
+            da[3] = (float)parseInt(""+m4.getText());
+
+            sumaDemandaAnual+=parseInt(""+m5.getText());
+            da[4] = (float)parseInt(""+m5.getText());
+
+            sumaDemandaAnual+=parseInt(""+m6.getText());
+            da[5] = (float)parseInt(""+m6.getText());
+
+            sumaDemandaAnual+=parseInt(""+m7.getText());
+            da[6] = (float)parseInt(""+m7.getText());
+
+            sumaDemandaAnual+=parseInt(""+m8.getText());
+            da[7] = (float)parseInt(""+m8.getText());
+
+            sumaDemandaAnual+=parseInt(""+m9.getText());
+            da[8] = (float)parseInt(""+m9.getText());
+
+            sumaDemandaAnual+=parseInt(""+m10.getText());
+            da[9] = (float)parseInt(""+m10.getText());
+
+            sumaDemandaAnual+=parseInt(""+m11.getText());
+            da[10] = (float)parseInt(""+m11.getText());
+
+            sumaDemandaAnual+=parseInt(""+m12.getText());
+            da[11] = (float)parseInt(""+m12.getText());
+
+            // OBTENER TEXTO DE LOS TEXT FIELDS DE TIEMPO DE ENTREGA
+            Component[] children = panelTiempoEntrega.getComponents();
+            for (int i=0;i<children.length;i++){
+                if (children[i] instanceof JTextField){
+                    String text = ((JTextField)children[i]).getText();
+                    lineas++;
+                    this.tiempoentrega += parseInt(text);
+                    
+                    if(i == 0) post[2] = text;
+                    else post[2] = post[2]+','+text;
+                }
+            }
+
+            float auxTiempoEntrega;
+            auxTiempoEntrega = this.tiempoentrega / lineas; 
+            this.tiempoentrega  = auxTiempoEntrega;
+
+            ndap = criticidad(indisponibilidad, this.tiempoentrega );
+
+            float stockminimo = 0;
+            stockminimo = (float)(this.tiempoentrega*((double) sumaDemandaAnual/365));
+
+            float tpum = 0;
+            tpum = sumaDemandaAnual/12;
+            
+            float dap=0;
+
+            for (int i = 0; i < 12; i++) {
+                float auxDa = Math.abs((float)(da[i]-tpum));   
+                da[i] = auxDa;
+                dap = dap + da[i];
+            }
+
+            float auxDap = dap/12;
+            dap = auxDap;
+
+            float stockseguridad = 0;
+            stockseguridad = (stockminimo*ndap*dap)/tpum;
+            float puntope = stockminimo + stockseguridad;
+            float nivelser = 100 - ((100-this.confianzaGlobal)*this.tiempoentrega*sumaDemandaAnual)/(cp*365);
+
+            demandaAnual.setText(""+(int)sumaDemandaAnual);
+            DEMANDA_TOTAL_ANUAL.setText(""+(int)sumaDemandaAnual);
+
+            uptcrit(ndap);     
+
+            // Grafico PDP en función al Nivel de confianza
+            double ppmin= ((stockminimo * 0 * dap)/tpum) + stockminimo;
+            double ppmax= ((stockminimo * 5 * dap)/tpum) + stockminimo;
+
+           // GraficoPDPNivelConfianza graficoNC = new GraficoPDPNivelConfianza(ppmin, ppmax, this.confianzaGlobal);
+
+            // Grafico Nivel de Servicio en función del nivel de Confianza
+            float nsmin = 100 - ((100-80)*sumaDemandaAnual*this.tiempoentrega)/(cp*365);
+            if (nsmin > 1) nsmin -= 2;
+
+            float nsmax = (float) (100 - ((100-99.99)*sumaDemandaAnual*this.tiempoentrega)/(cp*365));
+            // GraficoNivelServicioNC nivelServicioNC = new GraficoNivelServicioNC(nsmin, nsmax, this.confianzaGlobal, nivelser);
+
+            // Grafico Nivel de Servicio en función al tiempo de entrega
+            // GraficoNivelServicioTiempoEntrega graficoTE = new GraficoNivelServicioTiempoEntrega(ppmin, ppmax, nivelser, this.tiempoentrega);
+            ResultadosARPDP resultados = new ResultadosARPDP(puntope, nivelser, ppmin, ppmax, nsmin, nsmax,this.confianzaGlobal, this.tiempoentrega);
+        }
+        
+        return false;
     }
     
     public int criticidad (int indisponibilidad, float tiempo) {
@@ -1001,14 +1200,26 @@ public class VentanaAR extends javax.swing.JFrame {
         m10.setText("");
         m11.setText("");
         m12.setText("");
+        
+        
+        Component[] children = panelTiempoEntrega.getComponents();
+        for (int i=0;i<children.length;i++){
+            if (children[i] instanceof JTextField){
+                ((JTextField)children[i]).setText("");
+            }
+        }
         cantidadCompradaItem.setText("");
-        tiempoentrega = 80;
+        tiempoentrega = 0;
         
         
     }//GEN-LAST:event_clearPuntoActionPerformed
 
     private void clearCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearCantidadActionPerformed
         // TODO add your handling code here:
+        DEMANDA_TOTAL_ANUAL.setText("");
+        COSTO_UNITARIO.setText("");
+        COSTO_PROCESAMIENTO_PEDIDO.setText("");
+        PORCENTAJE_COSTO.setText("");
     }//GEN-LAST:event_clearCantidadActionPerformed
 
     private void procesarCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_procesarCantidadActionPerformed
@@ -1019,6 +1230,222 @@ public class VentanaAR extends javax.swing.JFrame {
     private void PORCENTAJE_COSTOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PORCENTAJE_COSTOActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_PORCENTAJE_COSTOActionPerformed
+
+    private void m1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_m1KeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        
+        if(Character.isLetter(validar)){
+            getToolkit().beep();
+            evt.consume();
+            
+            JOptionPane.showMessageDialog(null, "Ingresar solo números!");
+        }
+    }//GEN-LAST:event_m1KeyTyped
+
+    private void m2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_m2KeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        
+        if(Character.isLetter(validar)){
+            getToolkit().beep();
+            evt.consume();
+            
+            JOptionPane.showMessageDialog(null, "Ingresar solo números!");
+        }
+    }//GEN-LAST:event_m2KeyTyped
+
+    private void m3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_m3KeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        
+        if(Character.isLetter(validar)){
+            getToolkit().beep();
+            evt.consume();
+            
+            JOptionPane.showMessageDialog(null, "Ingresar solo números!");
+        }
+    }//GEN-LAST:event_m3KeyTyped
+
+    private void m4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_m4KeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        
+        if(Character.isLetter(validar)){
+            getToolkit().beep();
+            evt.consume();
+            
+            JOptionPane.showMessageDialog(null, "Ingresar solo números!");
+        }
+    }//GEN-LAST:event_m4KeyTyped
+
+    private void m5KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_m5KeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        
+        if(Character.isLetter(validar)){
+            getToolkit().beep();
+            evt.consume();
+            
+            JOptionPane.showMessageDialog(null, "Ingresar solo números!");
+        }
+    }//GEN-LAST:event_m5KeyTyped
+
+    private void m6KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_m6KeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        
+        if(Character.isLetter(validar)){
+            getToolkit().beep();
+            evt.consume();
+            
+            JOptionPane.showMessageDialog(null, "Ingresar solo números!");
+        }
+    }//GEN-LAST:event_m6KeyTyped
+
+    private void m7KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_m7KeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        
+        if(Character.isLetter(validar)){
+            getToolkit().beep();
+            evt.consume();
+            
+            JOptionPane.showMessageDialog(null, "Ingresar solo números!");
+        }
+    }//GEN-LAST:event_m7KeyTyped
+
+    private void m8KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_m8KeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        
+        if(Character.isLetter(validar)){
+            getToolkit().beep();
+            evt.consume();
+            
+            JOptionPane.showMessageDialog(null, "Ingresar solo números!");
+        }
+    }//GEN-LAST:event_m8KeyTyped
+
+    private void m9KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_m9KeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        
+        if(Character.isLetter(validar)){
+            getToolkit().beep();
+            evt.consume();
+            
+            JOptionPane.showMessageDialog(null, "Ingresar solo números!");
+        }
+    }//GEN-LAST:event_m9KeyTyped
+
+    private void m10KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_m10KeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        
+        if(Character.isLetter(validar)){
+            getToolkit().beep();
+            evt.consume();
+            
+            JOptionPane.showMessageDialog(null, "Ingresar solo números!");
+        }
+    }//GEN-LAST:event_m10KeyTyped
+
+    private void m11KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_m11KeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        
+        if(Character.isLetter(validar)){
+            getToolkit().beep();
+            evt.consume();
+            
+            JOptionPane.showMessageDialog(null, "Ingresar solo números!");
+        }
+    }//GEN-LAST:event_m11KeyTyped
+
+    private void m12KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_m12KeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        
+        if(Character.isLetter(validar)){
+            getToolkit().beep();
+            evt.consume();
+            
+            JOptionPane.showMessageDialog(null, "Ingresar solo números!");
+        }
+    }//GEN-LAST:event_m12KeyTyped
+
+    private void cantidadCompradaItemKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cantidadCompradaItemKeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        
+        if(Character.isLetter(validar)){
+            getToolkit().beep();
+            evt.consume();
+            
+            JOptionPane.showMessageDialog(null, "Ingresar solo números!");
+        }
+    }//GEN-LAST:event_cantidadCompradaItemKeyTyped
+
+    private void t0KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_t0KeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        
+        if(Character.isLetter(validar)){
+            getToolkit().beep();
+            evt.consume();
+            
+            JOptionPane.showMessageDialog(null, "Ingresar solo números!");
+        }
+    }//GEN-LAST:event_t0KeyTyped
+
+    private void DEMANDA_TOTAL_ANUALKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DEMANDA_TOTAL_ANUALKeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        
+        if(Character.isLetter(validar)){
+            getToolkit().beep();
+            evt.consume();
+            
+            JOptionPane.showMessageDialog(null, "Ingresar solo números!");
+        }
+    }//GEN-LAST:event_DEMANDA_TOTAL_ANUALKeyTyped
+
+    private void COSTO_UNITARIOKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_COSTO_UNITARIOKeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        
+        if(Character.isLetter(validar)){
+            getToolkit().beep();
+            evt.consume();
+            
+            JOptionPane.showMessageDialog(null, "Ingresar solo números!");
+        }
+    }//GEN-LAST:event_COSTO_UNITARIOKeyTyped
+
+    private void COSTO_PROCESAMIENTO_PEDIDOKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_COSTO_PROCESAMIENTO_PEDIDOKeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        
+        if(Character.isLetter(validar)){
+            getToolkit().beep();
+            evt.consume();
+            
+            JOptionPane.showMessageDialog(null, "Ingresar solo números!");
+        }
+    }//GEN-LAST:event_COSTO_PROCESAMIENTO_PEDIDOKeyTyped
+
+    private void PORCENTAJE_COSTOKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PORCENTAJE_COSTOKeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        
+        if(Character.isLetter(validar)){
+            getToolkit().beep();
+            evt.consume();
+            
+            JOptionPane.showMessageDialog(null, "Ingresar solo números!");
+        }
+    }//GEN-LAST:event_PORCENTAJE_COSTOKeyTyped
 
     /**
      * @param args the command line arguments

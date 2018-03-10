@@ -8,6 +8,7 @@ package optim;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
 import static java.lang.Math.abs;
 import static java.lang.Math.exp;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -123,9 +125,21 @@ public class VentanaBR extends javax.swing.JFrame {
 
         jLabel24.setText("Partes iguales operando simultaneamente:");
 
+        partesIgualesOperandoSimult.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                partesIgualesOperandoSimultKeyTyped(evt);
+            }
+        });
+
         jLabel25.setText("Tiempo Medio para Fallar Mean Time to Failure (MTTF):");
 
         jLabel26.setText("Consecuencia de la Indisponibilidad:");
+
+        mttf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                mttfKeyTyped(evt);
+            }
+        });
 
         jLabel27.setText("Tiempo de Entrega:");
 
@@ -134,6 +148,11 @@ public class VentanaBR extends javax.swing.JFrame {
         tiempoEntrega.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tiempoEntregaActionPerformed(evt);
+            }
+        });
+        tiempoEntrega.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tiempoEntregaKeyTyped(evt);
             }
         });
 
@@ -248,12 +267,51 @@ public class VentanaBR extends javax.swing.JFrame {
 
     private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
         // TODO add your handling code here:
+        partesIgualesOperandoSimult.setText("");
+        mttf.setText("");
+        tiempoEntrega.setText("");
     }//GEN-LAST:event_clearActionPerformed
 
     private void procesarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_procesarActionPerformed
         // TODO add your handling code here:
         graficarBR();
     }//GEN-LAST:event_procesarActionPerformed
+
+    private void partesIgualesOperandoSimultKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_partesIgualesOperandoSimultKeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        
+        if(Character.isLetter(validar)){
+            getToolkit().beep();
+            evt.consume();
+            
+            JOptionPane.showMessageDialog(null, "Ingresar solo números!");
+        }
+    }//GEN-LAST:event_partesIgualesOperandoSimultKeyTyped
+
+    private void mttfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_mttfKeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        
+        if(Character.isLetter(validar)){
+            getToolkit().beep();
+            evt.consume();
+            
+            JOptionPane.showMessageDialog(null, "Ingresar solo números!");
+        }
+    }//GEN-LAST:event_mttfKeyTyped
+
+    private void tiempoEntregaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tiempoEntregaKeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        
+        if(Character.isLetter(validar)){
+            getToolkit().beep();
+            evt.consume();
+            
+            JOptionPane.showMessageDialog(null, "Ingresar solo números!");
+        }
+    }//GEN-LAST:event_tiempoEntregaKeyTyped
 
     /**
      * @param args the command line arguments
@@ -291,15 +349,18 @@ public class VentanaBR extends javax.swing.JFrame {
         });
     }
     
-    public boolean validar () {
+    public boolean validarBR() {
         
         if (partesIgualesOperandoSimult.getText().isEmpty() || partesIgualesOperandoSimult.getText() == null) {
+            JOptionPane.showMessageDialog(null, "No puede dejar los campos vacíos.");
             return false;
         }
         if (mttf.getText().isEmpty() || mttf.getText() == null) {
+            JOptionPane.showMessageDialog(null, "No puede dejar los campos vacíos.");
             return false;
         }
         if (tiempoEntrega.getText().isEmpty() || tiempoEntrega.getText() == null) {
+            JOptionPane.showMessageDialog(null, "No puede dejar los campos vacíos.");
             return false;
         }
         return true;
@@ -331,14 +392,14 @@ public class VentanaBR extends javax.swing.JFrame {
     }
     
     public boolean procesarBR () {
-        //if (validar()) {
+        if (validarBR()) {
             int partesoperando = parseInt(partesIgualesOperandoSimult.getText());
             int mtbf = parseInt(mttf.getText());
-            float tiempoentrega = parseInt(tiempoEntrega.getText());
+            int tiempoentrega = parseInt(tiempoEntrega.getText());
             int consecuencia = 0;
 
             if (partesoperando < 0 || mtbf < 0 || tiempoentrega < 0) {
-                //error("Todos los campos deben ser positivos");
+                JOptionPane.showMessageDialog(null, "Todos los campos deben ser positivos");
             }
             if(consecuenciaIndisponibilidad.getSelectedItem().toString().equalsIgnoreCase("No afecta la producción"))
             {
@@ -365,7 +426,7 @@ public class VentanaBR extends javax.swing.JFrame {
             }
 
             if (confianzadeseada > 100 || confianzadeseada < 0) {
-            //	error("La confianza deseada debe ser un valor entre 0 y 100.");
+                JOptionPane.showMessageDialog(null, "La confianza deseada debe ser un valor entre 0 y 100.");
                 return false;
             }
 
@@ -389,8 +450,8 @@ public class VentanaBR extends javax.swing.JFrame {
             uptcrit(crit);
             
             return true;
-        //}
-        //return false;
+        }
+        return false;
     }
 
     
@@ -416,7 +477,7 @@ public class VentanaBR extends javax.swing.JFrame {
     
     public void graficarBR () {
         
-        procesarBR();
+        if(procesarBR()){
 
             int partesoperando = parseInt(partesIgualesOperandoSimult.getText());
             int mtbf = parseInt(mttf.getText());
@@ -432,10 +493,7 @@ public class VentanaBR extends javax.swing.JFrame {
                 res.add(j, poisson(j, lambda));
                 if (confianzadeseada/100 <= (double)res.get(j)) {
                     control = true;
-                    // marca[j] = res[j];
-                    // marca[j+1] = res[j]*100;
                 } else {
-                    //marca[j] = null;
                     j++;
                 }
             }
@@ -458,10 +516,9 @@ public class VentanaBR extends javax.swing.JFrame {
                 if (i <= repuestosnecesarios) poissona.add((double)res.get(i)*100);
                 else {
                     poissona.add((double)poisson(i, lambda)*100);
-                    // if (recomendado == 0 && poissona[i] >= 99.9 && i > repuestosnecesarios) recomendado = i;
                 }
 
-              //  datas[i+1] = new Array(i, poissoni[i], poissona[i], 0, confianzarep);
+              
             };
 
             if (recomendado == 0) {
@@ -478,6 +535,7 @@ public class VentanaBR extends javax.swing.JFrame {
             ResultadosBR resultadosFrame = new ResultadosBR(this.confianzaDeseada, this.confianzadatosingresados, this.minimo, this.maximo, poissona, repuestosnecesarios, m, ejex, poissoni, confianzarep);
             
             //GraficaBR grafica = new GraficaBR(poissoni, poissona, 0,confianzarep);
+        }
     }
 
     public ArrayList PoissonInverso (double confiabilidad, double lambda) {
@@ -616,7 +674,7 @@ public class VentanaBR extends javax.swing.JFrame {
     public boolean positivo () {
 
         if (pos == 0) {
-            //error("Lambda debe ser positivo.");
+            JOptionPane.showMessageDialog(null, "Lambda debe ser positivo.");
             pos = 1;
             return true;
         }

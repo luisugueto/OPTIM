@@ -324,6 +324,7 @@
             <Component class="javax.swing.JTextField" name="m1">
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="m1ActionPerformed"/>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="m1KeyTyped"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5">
@@ -337,6 +338,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="m2">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="m2KeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel7">
               <Properties>
@@ -344,8 +348,14 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="m3">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="m3KeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="m4">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="m4KeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel8">
               <Properties>
@@ -358,6 +368,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="m5">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="m5KeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel10">
               <Properties>
@@ -365,8 +378,14 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="m6">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="m6KeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="m7">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="m7KeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel11">
               <Properties>
@@ -374,6 +393,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="m8">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="m8KeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel12">
               <Properties>
@@ -381,6 +403,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="m9">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="m9KeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel13">
               <Properties>
@@ -393,6 +418,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="m10">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="m10KeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel15">
               <Properties>
@@ -400,8 +428,14 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="m11">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="m11KeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="m12">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="m12KeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel16">
               <Properties>
@@ -512,6 +546,7 @@
                     <Component class="javax.swing.JTextField" name="t0">
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="t0ActionPerformed"/>
+                        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="t0KeyTyped"/>
                       </Events>
                     </Component>
                   </SubComponents>
@@ -551,6 +586,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="cantidadCompradaItem">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="cantidadCompradaItemKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="procesarPunto">
               <Properties>
@@ -685,9 +723,13 @@
             <Component class="javax.swing.JTextField" name="PORCENTAJE_COSTO">
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PORCENTAJE_COSTOActionPerformed"/>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="PORCENTAJE_COSTOKeyTyped"/>
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="DEMANDA_TOTAL_ANUAL">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="DEMANDA_TOTAL_ANUALKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel25">
               <Properties>
@@ -700,8 +742,14 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="COSTO_UNITARIO">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="COSTO_UNITARIOKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="COSTO_PROCESAMIENTO_PEDIDO">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="COSTO_PROCESAMIENTO_PEDIDOKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel27">
               <Properties>

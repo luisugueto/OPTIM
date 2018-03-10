@@ -9,7 +9,8 @@ import javax.swing.WindowConstants;
 
 /**
  *
- * @author Ypsis
+ * @author Luis Ugueto
+ * ugueto.luis19@gmail.com
  */
 public class ResultadosARPDP extends javax.swing.JFrame {
 
@@ -42,8 +43,8 @@ public class ResultadosARPDP extends javax.swing.JFrame {
         this.ConfianzaGlobal = confianzaGlobal;
         this.Tiempoentrega = tiempoentrega;
         
-        puntopedido.setText(""+puntope);
-        nivelservicio.setText(""+nivelser);
+        puntopedido.setText(""+Math.round(puntope * 100d) / 100d);
+        nivelservicio.setText(""+Math.round(nivelser * 100d) / 100d);
         this.setVisible(true);
     }
 

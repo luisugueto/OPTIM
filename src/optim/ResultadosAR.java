@@ -39,12 +39,12 @@ public class ResultadosAR extends javax.swing.JFrame {
         this.CTx = CT;
         this.XNx = XN;
         
-        cantidadEconomicaPedido.setText(""+cantidadEconomicaP);
-        tiempoEntrePedidos.setText(""+tiempoEntrePed);
-        pedidosAnuales.setText(""+pedidosAnio);
-        costoMantenerInventario.setText(""+costoMantInventario);
-        costoDeCompra.setText(""+costoComp);
-        costoTotalAnual.setText(""+costoAnio);
+        cantidadEconomicaPedido.setText(""+Math.round(cantidadEconomicaP * 100d) / 100d );
+        tiempoEntrePedidos.setText(""+Math.round(tiempoEntrePed * 100d) / 100d );
+        pedidosAnuales.setText(""+Math.round(pedidosAnio * 100d) / 100d );
+        costoMantenerInventario.setText(""+Math.round(costoMantInventario * 100d) / 100d );
+        costoDeCompra.setText(""+Math.round(costoComp * 100d) / 100d );
+        costoTotalAnual.setText(""+Math.round(costoAnio * 100d) / 100d );
         nivelserviciocep.setText(""+nivelSer);
         
         jLabel5.setText("<html><body>Costo de mantener en inventario la <br>cantidad económica de pedido:</body></html>");
@@ -75,7 +75,7 @@ public class ResultadosAR extends javax.swing.JFrame {
 		  //}
             
             // AGREGANDO COLUMNAS TABLA
-            model.addRow(new Object[]{K+1, CC.get(K), CM.get(K), CT.get(K)});
+            model.addRow(new Object[]{K+1, Math.round((double)CC.get(K) * 100d) / 100d, Math.round((double)CM.get(K) * 100d) / 100d, Math.round((double)CT.get(K) * 100d) / 100d});
             numRows++;
             if (val == K){
                 // AQUI VA EL ROW SELECCIONADO
