@@ -5,7 +5,12 @@
  */
 package optim;
 
+import java.awt.BorderLayout;
+import java.util.ArrayList;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.WindowConstants;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -13,14 +18,60 @@ import javax.swing.WindowConstants;
  * ugueto.luis19@gmail.com
  */
 public class ResultadosBR extends javax.swing.JFrame {
+   
+    private ArrayList poissona;
+    private ArrayList poissoni;
+    private double confianzarep;
     /**
      * Creates new form ResultadosBR
+     * @param confianzadeseada
+     * @param confianzadatosingresados
+     * @param stockminimo
+     * @param stockmaximo
+     * @param poissona
+     * @param repuestosnecesarios
+     * @param m
+     * @param ejex
      */
-    public ResultadosBR() {
+    public ResultadosBR(double confianzadeseada, double confianzadatosingresados, int stockminimo, int stockmaximo, ArrayList poisson, int repuestosnecesarios, int m, int ejex, ArrayList poissonb, double confianzar) {
         initComponents();
-        this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-    }
+        this.setLocationRelativeTo(null);
+        nivelDeseado.setText(""+confianzadeseada);
+        nivelConfianzaDatos.setText(""+confianzadatosingresados);
+        stockMinimo.setText(""+stockminimo);
+        stockMaximo.setText(""+stockmaximo);
+        
+        this.poissona = poisson;
+        this.poissoni = poissonb;
+        this.confianzarep = confianzar;
+        
+        // CREANDO TABLA
+        DefaultTableModel model = new DefaultTableModel(); 
+        JTable table = new JTable(model); 
+        table.setBounds(20, 20, 300, 400);
 
+        // COLUMNAS TABLA
+        model.addColumn("N° Repuestos"); 
+        model.addColumn("Nivel de Confianza"); 
+          
+        int numRows = 0;
+        for (int i = ejex; i >= repuestosnecesarios-m; i--) {
+            model.addRow(new Object[]{i,poissona.get(i)});
+            numRows++;
+            if (i == repuestosnecesarios) {
+                table.setRowSelectionInterval(numRows-1, numRows-1);
+           }
+        }
+        //Create the scroll pane and add the table to it. 
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBounds(20, 180, 400, 180);
+
+        //Add the scroll pane to this window.
+        panelResultadosBR.add(scrollPane, BorderLayout.CENTER);
+            
+        this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        this.setVisible(true);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,23 +83,116 @@ public class ResultadosBR extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        jTextField1 = new javax.swing.JTextField();
+        panelResultadosBR = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        nivelDeseado = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        nivelConfianzaDatos = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        stockMinimo = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        stockMaximo = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
         jLabel1.setText("RESULTADOS");
 
+        jTextField1.setText("jTextField1");
+
+        panelResultadosBR.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel2.setText("Nivel de Confianza Deseado:");
+
+        nivelDeseado.setEditable(false);
+        nivelDeseado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nivelDeseadoActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Nivel de confianza para los datos ingresados:");
+
+        nivelConfianzaDatos.setEditable(false);
+
+        jLabel4.setText("Stock mínimo recomendado:");
+
+        stockMinimo.setEditable(false);
+
+        jLabel5.setText("Stock maximo recomendado:");
+
+        stockMaximo.setEditable(false);
+
+        jButton1.setText("Ver Gráfica (CCP)");
+        jButton1.setToolTipText("Ver Gráfica (Confiabilidad por cantidad de producto)");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelResultadosBRLayout = new javax.swing.GroupLayout(panelResultadosBR);
+        panelResultadosBR.setLayout(panelResultadosBRLayout);
+        panelResultadosBRLayout.setHorizontalGroup(
+            panelResultadosBRLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelResultadosBRLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(panelResultadosBRLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addGroup(panelResultadosBRLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(nivelConfianzaDatos)
+                    .addComponent(nivelDeseado)
+                    .addComponent(stockMinimo)
+                    .addComponent(stockMaximo, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE))
+                .addGap(26, 26, 26))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelResultadosBRLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(148, 148, 148))
+        );
+        panelResultadosBRLayout.setVerticalGroup(
+            panelResultadosBRLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelResultadosBRLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(panelResultadosBRLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nivelDeseado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addGroup(panelResultadosBRLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(nivelConfianzaDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelResultadosBRLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(stockMinimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelResultadosBRLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(stockMaximo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 248, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator1)
+                    .addComponent(panelResultadosBR, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 306, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -57,11 +201,22 @@ public class ResultadosBR extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(248, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelResultadosBR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void nivelDeseadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nivelDeseadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nivelDeseadoActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        GraficaBR grafica = new GraficaBR(poissoni, poissona, 0,confianzarep);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -90,16 +245,22 @@ public class ResultadosBR extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ResultadosBR().setVisible(true);
-            }
-        });
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField nivelConfianzaDatos;
+    private javax.swing.JTextField nivelDeseado;
+    private javax.swing.JPanel panelResultadosBR;
+    private javax.swing.JTextField stockMaximo;
+    private javax.swing.JTextField stockMinimo;
     // End of variables declaration//GEN-END:variables
 }

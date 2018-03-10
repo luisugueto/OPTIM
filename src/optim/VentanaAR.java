@@ -32,6 +32,8 @@ public class VentanaAR extends javax.swing.JFrame {
     private int indice;
     private int x = 70, y = 55;
     private float confianzaGlobal = 0, tiempoentrega;
+    private float cantidadEconPedido, tiempoPed,  pedidosAnio,  costoCompra,  costoMantInventario, costoAnual, nivelServicioCEP;
+    
     /**
      * Creates new form VentanaAR
      */
@@ -39,13 +41,9 @@ public class VentanaAR extends javax.swing.JFrame {
         initComponents();
         jTextFields = new ArrayList<>();
         indice = 0;
-        demandaAnual.setEditable(false);
-        puntopedido.setEditable(false);        
+        demandaAnual.setEditable(false);      
         this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-        jLabel36.setText("<html><body>Costo de mantener en inventario la cantidad económica de pedido:</body></html>");
-        jLabel37.setText("<html><body>Costo de compra de la cantidad económica de pedido:</body></html>");
-        jLabel38.setText("<html><body>Costo total anual de la cantidad económica de pedido:</body></html>");
-        jLabel39.setText("<html><body>Nivel de servicio para la cantidad económica de pedido:</body></html>");
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -105,12 +103,6 @@ public class VentanaAR extends javax.swing.JFrame {
         clearPunto = new javax.swing.JButton();
         jLabel28 = new javax.swing.JLabel();
         demandaAnual = new javax.swing.JTextField();
-        nivelservicio = new javax.swing.JTextField();
-        puntopedido = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jSeparator5 = new javax.swing.JSeparator();
-        jLabel30 = new javax.swing.JLabel();
-        jLabel31 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
@@ -124,24 +116,7 @@ public class VentanaAR extends javax.swing.JFrame {
         jLabel27 = new javax.swing.JLabel();
         procesarCantidad = new javax.swing.JButton();
         clearCantidad = new javax.swing.JButton();
-        tiempoEntrePedidos = new javax.swing.JTextField();
-        pedidosAnuales = new javax.swing.JTextField();
-        costoMantenerInventario = new javax.swing.JTextField();
-        cantidadEconomicaPedido = new javax.swing.JTextField();
-        costoDeCompra = new javax.swing.JTextField();
-        costoTotalAnual = new javax.swing.JTextField();
-        nivelserviciocep = new javax.swing.JTextField();
-        jLabel32 = new javax.swing.JLabel();
-        jSeparator6 = new javax.swing.JSeparator();
-        jLabel33 = new javax.swing.JLabel();
-        jLabel34 = new javax.swing.JLabel();
-        jLabel35 = new javax.swing.JLabel();
-        jLabel36 = new javax.swing.JLabel();
-        jLabel37 = new javax.swing.JLabel();
-        jLabel38 = new javax.swing.JLabel();
-        jLabel39 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
         criticidadCantidad = new javax.swing.JPanel();
         criticidadLabel = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
@@ -285,17 +260,6 @@ public class VentanaAR extends javax.swing.JFrame {
 
         demandaAnual.setEditable(false);
 
-        nivelservicio.setEditable(false);
-
-        puntopedido.setEditable(false);
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("Resultados");
-
-        jLabel30.setText("Punto de Pedido:");
-
-        jLabel31.setText("Nivel de Servicio:");
-
         javax.swing.GroupLayout pdpLayout = new javax.swing.GroupLayout(pdp);
         pdp.setLayout(pdpLayout);
         pdpLayout.setHorizontalGroup(
@@ -369,9 +333,7 @@ public class VentanaAR extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(procesarPunto, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(pdpLayout.createSequentialGroup()
-                                .addGroup(pdpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel2))
+                                .addComponent(jLabel4)
                                 .addGap(0, 41, Short.MAX_VALUE)))
                         .addGap(18, 18, 18)
                         .addGroup(pdpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -398,20 +360,7 @@ public class VentanaAR extends javax.swing.JFrame {
                                         .addGap(0, 35, Short.MAX_VALUE))))
                             .addGroup(pdpLayout.createSequentialGroup()
                                 .addComponent(clearPunto, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pdpLayout.createSequentialGroup()
-                        .addComponent(jSeparator5)
-                        .addContainerGap())))
-            .addGroup(pdpLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(pdpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pdpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(puntopedido, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
-                    .addComponent(nivelservicio))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap())))))
         );
         pdpLayout.setVerticalGroup(
             pdpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -493,23 +442,11 @@ public class VentanaAR extends javax.swing.JFrame {
                 .addGroup(pdpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel28)
                     .addComponent(demandaAnual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pdpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(procesarPunto)
-                    .addComponent(clearPunto))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pdpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(puntopedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel30))
                 .addGap(18, 18, 18)
-                .addGroup(pdpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nivelservicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel31))
-                .addGap(289, 289, 289))
+                .addGroup(pdpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(clearPunto)
+                    .addComponent(procesarPunto))
+                .addGap(380, 380, 380))
         );
 
         jTabbedPane1.addTab("PUNTO DE PEDIDO", pdp);
@@ -545,47 +482,6 @@ public class VentanaAR extends javax.swing.JFrame {
             }
         });
 
-        tiempoEntrePedidos.setEditable(false);
-
-        pedidosAnuales.setEditable(false);
-
-        costoMantenerInventario.setEditable(false);
-
-        cantidadEconomicaPedido.setEditable(false);
-        cantidadEconomicaPedido.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cantidadEconomicaPedidoActionPerformed(evt);
-            }
-        });
-
-        costoDeCompra.setEditable(false);
-
-        costoTotalAnual.setEditable(false);
-
-        nivelserviciocep.setEditable(false);
-        nivelserviciocep.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nivelserviciocepActionPerformed(evt);
-            }
-        });
-
-        jLabel32.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel32.setText("Resultados");
-
-        jLabel33.setText("Cantidad económica de Pedido:");
-
-        jLabel34.setText("Tiempo entre pedidos:");
-
-        jLabel35.setText("Nº de pedidos al año:");
-
-        jLabel36.setText("jLabel33");
-
-        jLabel37.setText("jLabel33");
-
-        jLabel38.setText("jLabel33");
-
-        jLabel39.setText("jLabel33");
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -605,19 +501,12 @@ public class VentanaAR extends javax.swing.JFrame {
                     .addComponent(PORCENTAJE_COSTO))
                 .addGap(39, 39, 39))
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel23)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jSeparator4)))
+                    .addComponent(jSeparator4)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel32)
-                            .addComponent(jSeparator6))))
+                        .addComponent(jLabel23)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(100, 100, 100)
@@ -625,26 +514,6 @@ public class VentanaAR extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(clearCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(99, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel33, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel34, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel35, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel36, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel37, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel38, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel39, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cantidadEconomicaPedido, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
-                    .addComponent(tiempoEntrePedidos)
-                    .addComponent(pedidosAnuales)
-                    .addComponent(costoMantenerInventario)
-                    .addComponent(costoDeCompra)
-                    .addComponent(costoTotalAnual)
-                    .addComponent(nivelserviciocep))
-                .addGap(33, 33, 33))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -673,51 +542,12 @@ public class VentanaAR extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(procesarCantidad)
                     .addComponent(clearCantidad))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel32)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cantidadEconomicaPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel33))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tiempoEntrePedidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pedidosAnuales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(jLabel35, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(costoMantenerInventario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(costoDeCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(costoTotalAnual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nivelserviciocep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
         jTabbedPane1.addTab("CANTIDAD ECONÓMICA DE PEDIDO", jPanel2);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        jLabel3.setMaximumSize(new java.awt.Dimension(156, 156));
-        jLabel3.setMinimumSize(new java.awt.Dimension(156, 156));
 
         criticidadLabel.setBackground(new java.awt.Color(204, 204, 204));
         criticidadLabel.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
@@ -747,7 +577,6 @@ public class VentanaAR extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(criticidadCantidad, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(8, 8, 8)
                         .addComponent(jLabel29)
@@ -761,9 +590,7 @@ public class VentanaAR extends javax.swing.JFrame {
                 .addComponent(jLabel29)
                 .addGap(17, 17, 17)
                 .addComponent(criticidadCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(411, 411, 411)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -778,19 +605,15 @@ public class VentanaAR extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(262, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void procesarCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_procesarCantidadActionPerformed
-        // TODO add your handling code here:
-        graficarCEP();
-    }//GEN-LAST:event_procesarCantidadActionPerformed
 
     public void procesarCEP(){
         int demandaTotalAnual;
@@ -813,12 +636,12 @@ public class VentanaAR extends javax.swing.JFrame {
 		float costoTotalA = costoDeComp + costoMantenerInv;
 		porcentajeCostoFinal = porcentajeCosto*100;
 
-		cantidadEconomicaPedido.setText(""+cantidadEconomicaPe);
-		pedidosAnuales.setText(""+pedidosAnual);
-		tiempoEntrePedidos.setText(""+tiempoEntrePe);
-		costoDeCompra.setText(""+costoDeComp);
-		costoMantenerInventario.setText(""+costoMantenerInv);
-		costoTotalAnual.setText(""+costoTotalA);
+        this.cantidadEconPedido = cantidadEconomicaPe;
+        this.pedidosAnio = pedidosAnual;
+        this.tiempoPed = tiempoEntrePe;
+        this.costoCompra = costoDeComp;
+        this.costoMantInventario = costoMantenerInv;
+        this.costoAnual = costoTotalA;
         
     }
     
@@ -847,7 +670,7 @@ public class VentanaAR extends javax.swing.JFrame {
 			System.out.println(false);
 		} else {
             nivelserv = 100 - ((100-confianzaGlobal)*tiempoentrega*demandaTotalAnual)/(365*cantidadEconomicaPed);
-            nivelserviciocep.setText(""+nivelserv);
+            this.nivelServicioCEP = nivelserv;
         }
         
         
@@ -879,54 +702,15 @@ public class VentanaAR extends javax.swing.JFrame {
         
 		int max = 0;
         
-        // CREANDO TABLA
-        DefaultTableModel model = new DefaultTableModel(); 
-        JTable table = new JTable(model); 
-        table.setBounds(20, 20, 300, 400);
-        
-        // COLUMNAS TABLA
-        model.addColumn("Q"); 
-        model.addColumn("CC"); 
-        model.addColumn("CM"); 
-        model.addColumn("CT"); 
-        
-        int numRows = 0;
-        for (int K = val+1; K >= val-8; K--) {
-			if (K==1) max = CT.get(K).intValue();
-            
-		  //if (CC[Q] == null || CM[Q] == null || CT[Q] == null) {
-		  	
-		  	//break;
-		  //}
-            
-            // AGREGANDO COLUMNAS TABLA
-            model.addRow(new Object[]{K+1, CC.get(K), CM.get(K), CT.get(K)});
-            numRows++;
-            if (val == K){
-                // AQUI VA EL ROW SELECCIONADO
-                table.setRowSelectionInterval(numRows-1, numRows-1);
-            }
-        }        
-        
-        ResultadosAR resultadosFrame = new ResultadosAR();
+        ResultadosAR resultadosFrame = new ResultadosAR(this.cantidadEconPedido, this.tiempoPed, this.pedidosAnio, this.costoCompra, this.costoMantInventario, this.costoAnual, this.nivelServicioCEP, CC, CM, CT, val, XN);
         
         //Create the scroll pane and add the table to it. 
-        JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(20, 60, 300, 130);
         
         //Add the scroll pane to this window.
-        resultadosFrame.add(scrollPane, BorderLayout.CENTER);
         resultadosFrame.setVisible(true);
-        
         resultadosFrame.show();	
-        
-        GraficaCEP grafica = new GraficaCEP(CC, CM, CT, XN);
     }
     
-    private void PORCENTAJE_COSTOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PORCENTAJE_COSTOActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_PORCENTAJE_COSTOActionPerformed
-
     private void procesarPuntoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_procesarPuntoActionPerformed
         // TODO add your handling code here:         
         procesarPDP();
@@ -1061,13 +845,11 @@ public class VentanaAR extends javax.swing.JFrame {
 		else */
         //System.out.println(puntope);
         //System.out.println(nivelser);
-		puntopedido.setText(""+puntope);
-		nivelservicio.setText(""+nivelser);
-        demandaAnual.setText(""+(int)sumaDemandaAnual);
-        DEMANDA_TOTAL_ANUAL.setText(""+(int)sumaDemandaAnual);
 
-		uptcrit(ndap);        
-		
+        demandaAnual.setText(""+(int)sumaDemandaAnual);
+
+		uptcrit(ndap);     
+        
         // Grafico PDP en función al Nivel de confianza
 		double ppmin= ((stockminimo * 0 * dap)/tpum) + stockminimo;
 		double ppmax= ((stockminimo * 5 * dap)/tpum) + stockminimo;
@@ -1083,7 +865,9 @@ public class VentanaAR extends javax.swing.JFrame {
         // GraficoNivelServicioNC nivelServicioNC = new GraficoNivelServicioNC(nsmin, nsmax, this.confianzaGlobal, nivelser);
         
         // Grafico Nivel de Servicio en función al tiempo de entrega
-        GraficoNivelServicioTiempoEntrega graficoTE = new GraficoNivelServicioTiempoEntrega(ppmin, ppmax, nivelser, this.tiempoentrega);
+        // GraficoNivelServicioTiempoEntrega graficoTE = new GraficoNivelServicioTiempoEntrega(ppmin, ppmax, nivelser, this.tiempoentrega);
+        
+        ResultadosARPDP resultados = new ResultadosARPDP(puntope, nivelser, ppmin, ppmax, nsmin, nsmax,this.confianzaGlobal, this.tiempoentrega);
 
     }
     
@@ -1203,10 +987,6 @@ public class VentanaAR extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_m1ActionPerformed
 
-    private void clearCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearCantidadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_clearCantidadActionPerformed
-
     private void clearPuntoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearPuntoActionPerformed
         // TODO add your handling code here:
         m1.setText("");
@@ -1222,19 +1002,23 @@ public class VentanaAR extends javax.swing.JFrame {
         m11.setText("");
         m12.setText("");
         cantidadCompradaItem.setText("");
-        puntopedido.setText("");
         tiempoentrega = 80;
         
         
     }//GEN-LAST:event_clearPuntoActionPerformed
 
-    private void cantidadEconomicaPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cantidadEconomicaPedidoActionPerformed
+    private void clearCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearCantidadActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cantidadEconomicaPedidoActionPerformed
+    }//GEN-LAST:event_clearCantidadActionPerformed
 
-    private void nivelserviciocepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nivelserviciocepActionPerformed
+    private void procesarCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_procesarCantidadActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_nivelserviciocepActionPerformed
+        graficarCEP();
+    }//GEN-LAST:event_procesarCantidadActionPerformed
+
+    private void PORCENTAJE_COSTOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PORCENTAJE_COSTOActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PORCENTAJE_COSTOActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1277,13 +1061,9 @@ public class VentanaAR extends javax.swing.JFrame {
     private javax.swing.JTextField DEMANDA_TOTAL_ANUAL;
     private javax.swing.JTextField PORCENTAJE_COSTO;
     private javax.swing.JTextField cantidadCompradaItem;
-    private javax.swing.JTextField cantidadEconomicaPedido;
     private javax.swing.JButton clearCantidad;
     private javax.swing.JButton clearPunto;
     private javax.swing.JComboBox<String> consecuenciaIndisponibilidad;
-    private javax.swing.JTextField costoDeCompra;
-    private javax.swing.JTextField costoMantenerInventario;
-    private javax.swing.JTextField costoTotalAnual;
     private javax.swing.JPanel criticidadCantidad;
     private javax.swing.JLabel criticidadLabel;
     private javax.swing.JTextField demandaAnual;
@@ -1300,7 +1080,6 @@ public class VentanaAR extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
@@ -1311,17 +1090,6 @@ public class VentanaAR extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel37;
-    private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1335,8 +1103,6 @@ public class VentanaAR extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JSeparator jSeparator6;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField m1;
     private javax.swing.JTextField m10;
@@ -1350,15 +1116,10 @@ public class VentanaAR extends javax.swing.JFrame {
     private javax.swing.JTextField m7;
     private javax.swing.JTextField m8;
     private javax.swing.JTextField m9;
-    private javax.swing.JTextField nivelservicio;
-    private javax.swing.JTextField nivelserviciocep;
     private javax.swing.JPanel panelTiempoEntrega;
     private javax.swing.JPanel pdp;
-    private javax.swing.JTextField pedidosAnuales;
     private javax.swing.JButton procesarCantidad;
     private javax.swing.JButton procesarPunto;
-    private javax.swing.JTextField puntopedido;
     private javax.swing.JTextField t0;
-    private javax.swing.JTextField tiempoEntrePedidos;
     // End of variables declaration//GEN-END:variables
 }

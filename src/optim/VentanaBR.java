@@ -28,13 +28,15 @@ import javax.swing.table.DefaultTableModel;
  * ugueto.luis19@gmail.com
  */
 public class VentanaBR extends javax.swing.JFrame {
-    int pos = 0;
+    int pos = 0, minimo = 0, maximo = 0;
+    private double confianzaDeseada = 0, confianzadatosingresados = 0;
     /**
      * Creates new form VentanaAR
      */
     public VentanaBR() {
         initComponents();
         this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -47,19 +49,9 @@ public class VentanaBR extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel3 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
         panelCriticidad = new javax.swing.JPanel();
         criticidadLabel = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        confianzaBR = new javax.swing.JTextField();
-        jLabel30 = new javax.swing.JLabel();
-        confianzad = new javax.swing.JTextField();
-        jLabel31 = new javax.swing.JLabel();
-        jLabel32 = new javax.swing.JLabel();
-        necesarios = new javax.swing.JTextField();
-        jLabel33 = new javax.swing.JLabel();
-        recomendados = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
@@ -69,21 +61,17 @@ public class VentanaBR extends javax.swing.JFrame {
         jLabel26 = new javax.swing.JLabel();
         mttf = new javax.swing.JTextField();
         jLabel27 = new javax.swing.JLabel();
-        procesar = new javax.swing.JButton();
-        clear = new javax.swing.JButton();
         consecuenciaIndisponibilidad = new javax.swing.JComboBox<String>();
         tiempoEntrega = new javax.swing.JTextField();
-        jLabel29 = new javax.swing.JLabel();
-        jSeparator2 = new javax.swing.JSeparator();
+        clear = new javax.swing.JButton();
+        procesar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(600, 480));
+        setMinimumSize(new java.awt.Dimension(600, 250));
+        setPreferredSize(new java.awt.Dimension(667, 300));
         setResizable(false);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        jLabel3.setMaximumSize(new java.awt.Dimension(156, 156));
-        jLabel3.setMinimumSize(new java.awt.Dimension(156, 156));
 
         criticidadLabel.setBackground(new java.awt.Color(204, 204, 204));
         criticidadLabel.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
@@ -112,10 +100,6 @@ public class VentanaBR extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(176, 176, 176)
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelCriticidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -131,90 +115,7 @@ public class VentanaBR extends javax.swing.JFrame {
                 .addComponent(jLabel28)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelCriticidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(172, Short.MAX_VALUE))
-        );
-
-        confianzaBR.setEditable(false);
-        confianzaBR.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                confianzaBRActionPerformed(evt);
-            }
-        });
-
-        jLabel30.setText("Nivel de confianza para los datos ingresados:");
-
-        confianzad.setEditable(false);
-        confianzad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                confianzadActionPerformed(evt);
-            }
-        });
-
-        jLabel31.setText("Nivel de Confianza Deseado:");
-
-        jLabel32.setText("Stock mínimo recomendado:");
-
-        necesarios.setEditable(false);
-        necesarios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                necesariosActionPerformed(evt);
-            }
-        });
-
-        jLabel33.setText("Stock máximo recomendado:");
-
-        recomendados.setEditable(false);
-        recomendados.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                recomendadosActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jLabel31, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel32, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(recomendados, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(necesarios, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(confianzaBR, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(confianzad, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(96, 96, 96))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(confianzad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(confianzaBR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel32)
-                    .addComponent(necesarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(recomendados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -228,20 +129,6 @@ public class VentanaBR extends javax.swing.JFrame {
 
         jLabel27.setText("Tiempo de Entrega:");
 
-        procesar.setText("Procesar y Gráficar");
-        procesar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                procesarActionPerformed(evt);
-            }
-        });
-
-        clear.setText("Borrar Datos");
-        clear.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clearActionPerformed(evt);
-            }
-        });
-
         consecuenciaIndisponibilidad.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "No afecta la producción", "Afecta parcialmente la producción", "Paraliza totalmente la producción" }));
 
         tiempoEntrega.addActionListener(new java.awt.event.ActionListener() {
@@ -249,9 +136,6 @@ public class VentanaBR extends javax.swing.JFrame {
                 tiempoEntregaActionPerformed(evt);
             }
         });
-
-        jLabel29.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel29.setText("Resultados");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -264,28 +148,20 @@ public class VentanaBR extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel23)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addGap(0, 14, Short.MAX_VALUE))
                             .addComponent(jSeparator4)))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                .addGap(116, 116, 116)
-                                .addComponent(procesar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(clear))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel29)
-                                    .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel25, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
-                                    .addComponent(jLabel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel27, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(partesIgualesOperandoSimult, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(consecuenciaIndisponibilidad, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tiempoEntrega, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(mttf, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel25, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
+                            .addComponent(jLabel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel27, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(partesIgualesOperandoSimult, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(consecuenciaIndisponibilidad, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tiempoEntrega, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(mttf, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -312,13 +188,22 @@ public class VentanaBR extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tiempoEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(procesar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(clear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(21, 21, 21)
-                .addComponent(jLabel29))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        clear.setText("Borrar Datos");
+        clear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearActionPerformed(evt);
+            }
+        });
+
+        procesar.setText("Procesar y Gráficar");
+        procesar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                procesarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -327,53 +212,35 @@ public class VentanaBR extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(10, 10, 10)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 478, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 172, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(procesar)
+                        .addGap(18, 18, 18)
+                        .addComponent(clear)
+                        .addGap(108, 108, 108)))
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(clear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(procesar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void confianzaBRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confianzaBRActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_confianzaBRActionPerformed
-
-    private void confianzadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confianzadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_confianzadActionPerformed
-
-    private void necesariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_necesariosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_necesariosActionPerformed
-
-    private void recomendadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recomendadosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_recomendadosActionPerformed
 
     private void tiempoEntregaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tiempoEntregaActionPerformed
         // TODO add your handling code here:
@@ -432,7 +299,7 @@ public class VentanaBR extends javax.swing.JFrame {
         if (mttf.getText().isEmpty() || mttf.getText() == null) {
             return false;
         }
-        if (confianzaBR.getText().isEmpty() || confianzaBR.getText() == null) {
+        if (tiempoEntrega.getText().isEmpty() || tiempoEntrega.getText() == null) {
             return false;
         }
         return true;
@@ -515,9 +382,9 @@ public class VentanaBR extends javax.swing.JFrame {
             float division = repuestosnecesarios/10;
             int ejex = (int) ((division+1)*10);
 
-            confianzad.setText(""+confianzadeseada);
-            necesarios.setText(""+repuestosnecesarios);
-            confianzaBR.setText(""+confianzarep);
+            this.confianzaDeseada = confianzadeseada;
+            this.minimo = repuestosnecesarios;
+            this.confianzadatosingresados = confianzarep;
 
             uptcrit(crit);
             
@@ -533,17 +400,14 @@ public class VentanaBR extends javax.swing.JFrame {
         if (criticidad == 5) {
             texto = "Alta";
             panelCriticidad.setBackground(Color.RED);
-            // valor = 100;
         }
         else if (criticidad == 3) {
             texto = "Media";
             panelCriticidad.setBackground(Color.ORANGE);
-            // valor = 60;
         }
         else if (criticidad == 1) {
             texto = "Baja";
             panelCriticidad.setBackground(Color.GREEN);
-            // valor = 30;
         }
 
         criticidadLabel.setText(texto);
@@ -557,7 +421,7 @@ public class VentanaBR extends javax.swing.JFrame {
             int partesoperando = parseInt(partesIgualesOperandoSimult.getText());
             int mtbf = parseInt(mttf.getText());
             int tiempoentrega = parseInt(tiempoEntrega.getText());
-            double confianzadeseada = (double)parseInt(confianzad.getText());
+            double confianzadeseada = this.confianzaDeseada;
             double confiabilidad = confianzadeseada;
 
             double lambda = partesoperando*(tiempoentrega*24/mtbf);
@@ -606,43 +470,14 @@ public class VentanaBR extends javax.swing.JFrame {
             
             int m = 10-(ejex - repuestosnecesarios);
             
-            // CREANDO TABLA
-            DefaultTableModel model = new DefaultTableModel(); 
-            JTable table = new JTable(model); 
-            table.setBounds(20, 20, 300, 400);
-            //table.setPreferredSize(new Dimension(300, 0));
 
-            // COLUMNAS TABLA
-            model.addColumn("N° Repuestos"); 
-            model.addColumn("Nivel de Confianza"); 
-            
-            int numRows = 0;
-            for (int i = ejex; i >= repuestosnecesarios-m; i--) {
-                model.addRow(new Object[]{i,poissona.get(i)});
-                numRows++;
-
-                if (i == repuestosnecesarios) {
-                    table.setRowSelectionInterval(numRows-1, numRows-1);
-                }
-            }
-
-            int neces = parseInt(necesarios.getText());
+            int neces = this.minimo;
             neces++;
-            recomendados.setText(""+neces); 
+            this.maximo = neces;
             
-            ResultadosBR resultadosFrame = new ResultadosBR();
-
-            //Create the scroll pane and add the table to it. 
-            JScrollPane scrollPane = new JScrollPane(table);
-            scrollPane.setBounds(20, 60, 300, 180);
-
-            //Add the scroll pane to this window.
-            resultadosFrame.add(scrollPane, BorderLayout.CENTER);
-            resultadosFrame.setVisible(true);
+            ResultadosBR resultadosFrame = new ResultadosBR(this.confianzaDeseada, this.confianzadatosingresados, this.minimo, this.maximo, poissona, repuestosnecesarios, m, ejex, poissoni, confianzarep);
             
-            resultadosFrame.show();		
-            
-            GraficaBR grafica = new GraficaBR(poissoni, poissona, 0,confianzarep);
+            //GraficaBR grafica = new GraficaBR(poissoni, poissona, 0,confianzarep);
     }
 
     public ArrayList PoissonInverso (double confiabilidad, double lambda) {
@@ -791,8 +626,6 @@ public class VentanaBR extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton clear;
-    private javax.swing.JTextField confianzaBR;
-    private javax.swing.JTextField confianzad;
     private javax.swing.JComboBox<String> consecuenciaIndisponibilidad;
     private javax.swing.JLabel criticidadLabel;
     private javax.swing.JLabel jLabel23;
@@ -801,23 +634,13 @@ public class VentanaBR extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JTextField mttf;
-    private javax.swing.JTextField necesarios;
     private javax.swing.JPanel panelCriticidad;
     private javax.swing.JTextField partesIgualesOperandoSimult;
     private javax.swing.JButton procesar;
-    private javax.swing.JTextField recomendados;
     private javax.swing.JTextField tiempoEntrega;
     // End of variables declaration//GEN-END:variables
 }
