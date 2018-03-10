@@ -10,6 +10,8 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Point;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
@@ -1170,6 +1172,24 @@ public class VentanaAR extends javax.swing.JFrame {
             field.setBounds(x,y, 67, 20);
             label.setName("labelTiempoEntrega"+indice);
             field.setName("t"+indice);
+            field.addKeyListener(new KeyListener(){
+                @Override
+                public void keyTyped(KeyEvent ke) {
+                    char validar = ke.getKeyChar();
+
+                    if(Character.isLetter(validar)){
+                        getToolkit().beep();
+                        ke.consume();
+
+                        JOptionPane.showMessageDialog(null, "Ingresar solo números!");
+                    }
+                }
+                @Override
+                public void keyPressed(KeyEvent ke) { }
+
+                @Override
+                public void keyReleased(KeyEvent ke) { }
+            });
 
             jTextFields.add(field);
             panelTiempoEntrega.add(label);

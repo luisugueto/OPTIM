@@ -154,7 +154,7 @@ public class ResultadosBR extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelResultadosBRLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(148, 148, 148))
+                .addGap(157, 157, 157))
         );
         panelResultadosBRLayout.setVerticalGroup(
             panelResultadosBRLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
