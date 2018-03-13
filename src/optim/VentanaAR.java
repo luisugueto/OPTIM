@@ -135,6 +135,7 @@ public class VentanaAR extends javax.swing.JFrame {
 
         jLabel4.setText("Cantidad utilizada por mes (Piezas)");
 
+        m1.setToolTipText("Ejemplo: 10");
         m1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 m1ActionPerformed(evt);
@@ -150,6 +151,7 @@ public class VentanaAR extends javax.swing.JFrame {
 
         jLabel6.setText("Febrero");
 
+        m2.setToolTipText("Ejemplo: 10");
         m2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 m2KeyTyped(evt);
@@ -158,12 +160,14 @@ public class VentanaAR extends javax.swing.JFrame {
 
         jLabel7.setText("Marzo");
 
+        m3.setToolTipText("Ejemplo: 10");
         m3.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 m3KeyTyped(evt);
             }
         });
 
+        m4.setToolTipText("Ejemplo: 10");
         m4.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 m4KeyTyped(evt);
@@ -174,6 +178,7 @@ public class VentanaAR extends javax.swing.JFrame {
 
         jLabel9.setText("Mayo");
 
+        m5.setToolTipText("Ejemplo: 10");
         m5.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 m5KeyTyped(evt);
@@ -182,12 +187,14 @@ public class VentanaAR extends javax.swing.JFrame {
 
         jLabel10.setText("Junio");
 
+        m6.setToolTipText("Ejemplo: 10");
         m6.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 m6KeyTyped(evt);
             }
         });
 
+        m7.setToolTipText("Ejemplo: 10");
         m7.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 m7KeyTyped(evt);
@@ -196,6 +203,7 @@ public class VentanaAR extends javax.swing.JFrame {
 
         jLabel11.setText("Julio");
 
+        m8.setToolTipText("Ejemplo: 10");
         m8.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 m8KeyTyped(evt);
@@ -204,6 +212,7 @@ public class VentanaAR extends javax.swing.JFrame {
 
         jLabel12.setText("Agosto");
 
+        m9.setToolTipText("Ejemplo: 10");
         m9.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 m9KeyTyped(evt);
@@ -214,6 +223,7 @@ public class VentanaAR extends javax.swing.JFrame {
 
         jLabel14.setText("Octubre");
 
+        m10.setToolTipText("Ejemplo: 10");
         m10.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 m10KeyTyped(evt);
@@ -222,12 +232,14 @@ public class VentanaAR extends javax.swing.JFrame {
 
         jLabel15.setText("Noviembre");
 
+        m11.setToolTipText("Ejemplo: 10");
         m11.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 m11KeyTyped(evt);
             }
         });
 
+        m12.setToolTipText("Ejemplo: 10");
         m12.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 m12KeyTyped(evt);
@@ -250,6 +262,7 @@ public class VentanaAR extends javax.swing.JFrame {
 
         jLabel21.setText("1");
 
+        t0.setToolTipText("Días. Ejemplo: 10");
         t0.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 t0ActionPerformed(evt);
@@ -321,6 +334,7 @@ public class VentanaAR extends javax.swing.JFrame {
 
         jLabel22.setText("Cantidad comprada por pedido");
 
+        cantidadCompradaItem.setToolTipText("Piezas. Ejemplo: 10");
         cantidadCompradaItem.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 cantidadCompradaItemKeyTyped(evt);
@@ -344,6 +358,7 @@ public class VentanaAR extends javax.swing.JFrame {
         jLabel28.setText("Demanda Anual");
 
         demandaAnual.setEditable(false);
+        demandaAnual.setToolTipText("Piezas");
 
         javax.swing.GroupLayout pdpLayout = new javax.swing.GroupLayout(pdp);
         pdp.setLayout(pdpLayout);
@@ -541,6 +556,7 @@ public class VentanaAR extends javax.swing.JFrame {
 
         jLabel24.setText("Demanda Total Anual:");
 
+        PORCENTAJE_COSTO.setToolTipText("%. Ejemplo: 10.5");
         PORCENTAJE_COSTO.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PORCENTAJE_COSTOActionPerformed(evt);
@@ -552,6 +568,7 @@ public class VentanaAR extends javax.swing.JFrame {
             }
         });
 
+        DEMANDA_TOTAL_ANUAL.setToolTipText("Piezas. Ejemplo: 10");
         DEMANDA_TOTAL_ANUAL.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 DEMANDA_TOTAL_ANUALKeyTyped(evt);
@@ -562,12 +579,14 @@ public class VentanaAR extends javax.swing.JFrame {
 
         jLabel26.setText("Costo de procesamiento de cada pedido:");
 
+        COSTO_UNITARIO.setToolTipText("$. Ejemplo: 10.0");
         COSTO_UNITARIO.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 COSTO_UNITARIOKeyTyped(evt);
             }
         });
 
+        COSTO_PROCESAMIENTO_PEDIDO.setToolTipText("$. Ejemplo: 10.0");
         COSTO_PROCESAMIENTO_PEDIDO.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 COSTO_PROCESAMIENTO_PEDIDOKeyTyped(evt);
@@ -657,7 +676,6 @@ public class VentanaAR extends javax.swing.JFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        criticidadLabel.setBackground(new java.awt.Color(204, 204, 204));
         criticidadLabel.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         criticidadLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         criticidadLabel.setText("<html>CRITICIDAD");
@@ -1172,6 +1190,7 @@ public class VentanaAR extends javax.swing.JFrame {
             field.setBounds(x,y, 67, 20);
             label.setName("labelTiempoEntrega"+indice);
             field.setName("t"+indice);
+            field.setToolTipText("Días. Ejemplo: 10");
             field.addKeyListener(new KeyListener(){
                 @Override
                 public void keyTyped(KeyEvent ke) {
@@ -1230,6 +1249,10 @@ public class VentanaAR extends javax.swing.JFrame {
         }
         cantidadCompradaItem.setText("");
         tiempoentrega = 0;
+        confianzaGlobal = 0;
+        
+        criticidadCantidad.setBackground(new Color(240, 240, 240));
+        criticidadLabel.setText("CRITICIDAD");
         
         
     }//GEN-LAST:event_clearPuntoActionPerformed
@@ -1240,6 +1263,9 @@ public class VentanaAR extends javax.swing.JFrame {
         COSTO_UNITARIO.setText("");
         COSTO_PROCESAMIENTO_PEDIDO.setText("");
         PORCENTAJE_COSTO.setText("");
+        
+        criticidadCantidad.setBackground(new Color(240, 240, 240));
+        criticidadLabel.setText("CRITICIDAD");
     }//GEN-LAST:event_clearCantidadActionPerformed
 
     private void procesarCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_procesarCantidadActionPerformed

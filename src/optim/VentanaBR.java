@@ -75,7 +75,6 @@ public class VentanaBR extends javax.swing.JFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        criticidadLabel.setBackground(new java.awt.Color(204, 204, 204));
         criticidadLabel.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         criticidadLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         criticidadLabel.setText("<html>CRITICIDAD");
@@ -135,6 +134,12 @@ public class VentanaBR extends javax.swing.JFrame {
 
         jLabel26.setText("Consecuencia de la Indisponibilidad:");
 
+        mttf.setToolTipText("Horas");
+        mttf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mttfActionPerformed(evt);
+            }
+        });
         mttf.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 mttfKeyTyped(evt);
@@ -145,6 +150,7 @@ public class VentanaBR extends javax.swing.JFrame {
 
         consecuenciaIndisponibilidad.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "No afecta la producción", "Afecta parcialmente la producción", "Paraliza totalmente la producción" }));
 
+        tiempoEntrega.setToolTipText("Días. Ejemplo: 10");
         tiempoEntrega.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tiempoEntregaActionPerformed(evt);
@@ -270,6 +276,9 @@ public class VentanaBR extends javax.swing.JFrame {
         partesIgualesOperandoSimult.setText("");
         mttf.setText("");
         tiempoEntrega.setText("");
+        
+        panelCriticidad.setBackground(new Color(240, 240, 240));
+        criticidadLabel.setText("CRITICIDAD");
     }//GEN-LAST:event_clearActionPerformed
 
     private void procesarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_procesarActionPerformed
@@ -312,6 +321,10 @@ public class VentanaBR extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Ingresar solo números!");
         }
     }//GEN-LAST:event_tiempoEntregaKeyTyped
+
+    private void mttfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mttfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mttfActionPerformed
 
     /**
      * @param args the command line arguments

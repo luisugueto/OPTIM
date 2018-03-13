@@ -322,6 +322,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="m1">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="Ejemplo: 10"/>
+              </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="m1ActionPerformed"/>
                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="m1KeyTyped"/>
@@ -338,6 +341,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="m2">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="Ejemplo: 10"/>
+              </Properties>
               <Events>
                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="m2KeyTyped"/>
               </Events>
@@ -348,11 +354,17 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="m3">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="Ejemplo: 10"/>
+              </Properties>
               <Events>
                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="m3KeyTyped"/>
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="m4">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="Ejemplo: 10"/>
+              </Properties>
               <Events>
                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="m4KeyTyped"/>
               </Events>
@@ -368,6 +380,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="m5">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="Ejemplo: 10"/>
+              </Properties>
               <Events>
                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="m5KeyTyped"/>
               </Events>
@@ -378,11 +393,17 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="m6">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="Ejemplo: 10"/>
+              </Properties>
               <Events>
                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="m6KeyTyped"/>
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="m7">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="Ejemplo: 10"/>
+              </Properties>
               <Events>
                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="m7KeyTyped"/>
               </Events>
@@ -393,6 +414,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="m8">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="Ejemplo: 10"/>
+              </Properties>
               <Events>
                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="m8KeyTyped"/>
               </Events>
@@ -403,6 +427,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="m9">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="Ejemplo: 10"/>
+              </Properties>
               <Events>
                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="m9KeyTyped"/>
               </Events>
@@ -418,6 +445,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="m10">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="Ejemplo: 10"/>
+              </Properties>
               <Events>
                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="m10KeyTyped"/>
               </Events>
@@ -428,11 +458,17 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="m11">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="Ejemplo: 10"/>
+              </Properties>
               <Events>
                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="m11KeyTyped"/>
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="m12">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="Ejemplo: 10"/>
+              </Properties>
               <Events>
                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="m12KeyTyped"/>
               </Events>
@@ -544,6 +580,9 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="t0">
+                      <Properties>
+                        <Property name="toolTipText" type="java.lang.String" value="D&#xed;as. Ejemplo: 10"/>
+                      </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="t0ActionPerformed"/>
                         <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="t0KeyTyped"/>
@@ -586,6 +625,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="cantidadCompradaItem">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="Piezas. Ejemplo: 10"/>
+              </Properties>
               <Events>
                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="cantidadCompradaItemKeyTyped"/>
               </Events>
@@ -614,6 +656,7 @@
             <Component class="javax.swing.JTextField" name="demandaAnual">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
+                <Property name="toolTipText" type="java.lang.String" value="Piezas"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -721,12 +764,18 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="PORCENTAJE_COSTO">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="%. Ejemplo: 10.5"/>
+              </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PORCENTAJE_COSTOActionPerformed"/>
                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="PORCENTAJE_COSTOKeyTyped"/>
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="DEMANDA_TOTAL_ANUAL">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="Piezas. Ejemplo: 10"/>
+              </Properties>
               <Events>
                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="DEMANDA_TOTAL_ANUALKeyTyped"/>
               </Events>
@@ -742,11 +791,17 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="COSTO_UNITARIO">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="$. Ejemplo: 10.0"/>
+              </Properties>
               <Events>
                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="COSTO_UNITARIOKeyTyped"/>
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="COSTO_PROCESAMIENTO_PEDIDO">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="$. Ejemplo: 10.0"/>
+              </Properties>
               <Events>
                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="COSTO_PROCESAMIENTO_PEDIDOKeyTyped"/>
               </Events>
@@ -832,9 +887,6 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="criticidadLabel">
               <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="cc" green="cc" red="cc" type="rgb"/>
-                </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="20" style="1"/>
                 </Property>
