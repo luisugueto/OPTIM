@@ -15,7 +15,8 @@ import javax.swing.WindowConstants;
 public class ResultadosARPDP extends javax.swing.JFrame {
 
     private float puntoPe, nivelSer, Nsmin, Nsmax, ConfianzaGlobal, Tiempoentrega;
-    private double Ppmin,  Ppmax;
+    private double Ppmin,  Ppmax, StockMinimo, DAP, TPUM, sumaDemandaAnual;
+    private int cp;
             
     /**
      * Creates new form ResultadosARPDP
@@ -27,9 +28,13 @@ public class ResultadosARPDP extends javax.swing.JFrame {
      * @param nsmax
      * @param confianzaGlobal
      * @param tiempoentrega
+     * @param stockminimo
+     * @param dap
+     * @param tpum
+     * @param sumaDemandaAnual
      */
     
-    public ResultadosARPDP(float puntope, float nivelser, double ppmin, double ppmax, float nsmin, float nsmax, float confianzaGlobal, float tiempoentrega) {
+    public ResultadosARPDP(float puntope, float nivelser, double ppmin, double ppmax, float nsmin, float nsmax, float confianzaGlobal, float tiempoentrega, double stockminimo, double dap, double tpum, double sumaDemandaAnual, int cp) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
@@ -42,6 +47,11 @@ public class ResultadosARPDP extends javax.swing.JFrame {
         this.Nsmax = nsmax;
         this.ConfianzaGlobal = confianzaGlobal;
         this.Tiempoentrega = tiempoentrega;
+        this.StockMinimo = stockminimo;
+        this.DAP = dap;
+        this.TPUM = tpum;
+        this.sumaDemandaAnual = sumaDemandaAnual;
+        this.cp = cp;
         
         puntopedido.setText(""+Math.round(puntope * 100d) / 100d);
         nivelservicio.setText(""+Math.round(nivelser * 100d) / 100d);
@@ -166,17 +176,17 @@ public class ResultadosARPDP extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        GraficoPDPNivelConfianza graficoNC = new GraficoPDPNivelConfianza(this.Ppmin, this.Ppmax, this.ConfianzaGlobal);
+        GraficoPDPNivelConfianza graficoNC = new GraficoPDPNivelConfianza(this.Ppmin, this.Ppmax, this.ConfianzaGlobal, this.StockMinimo, this.DAP, this.TPUM, (double)this.Tiempoentrega, this.sumaDemandaAnual);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        GraficoNivelServicioNC nivelServicioNC = new GraficoNivelServicioNC(this.Nsmin, this.Nsmax, this.ConfianzaGlobal, this.nivelSer);
+        GraficoNivelServicioNC nivelServicioNC = new GraficoNivelServicioNC(this.Nsmin, this.Nsmax, this.ConfianzaGlobal, this.nivelSer, this.Tiempoentrega, this.sumaDemandaAnual, this.cp);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        GraficoNivelServicioTiempoEntrega graficoTE = new GraficoNivelServicioTiempoEntrega(this.Ppmin, this.Ppmax, this.nivelSer, this.Tiempoentrega);
+        GraficoNivelServicioTiempoEntrega graficoTE = new GraficoNivelServicioTiempoEntrega(this.Ppmin, this.Ppmax, this.nivelSer, this.Tiempoentrega, this.ConfianzaGlobal, this.sumaDemandaAnual, this.cp);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

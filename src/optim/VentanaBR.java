@@ -443,9 +443,7 @@ public class VentanaBR extends javax.swing.JFrame {
                 return false;
             }
 
-            int pos = 0;
-            float lambda = partesoperando*(tiempoentrega*24/mtbf);
-            
+            double lambda = (double)partesoperando*((double)(tiempoentrega*24)/(double)mtbf);
             ArrayList resultados = PoissonInverso(confianzadeseada, lambda);
 
             int repuestosnecesarios = (int) resultados.get(0);
@@ -498,8 +496,8 @@ public class VentanaBR extends javax.swing.JFrame {
             double confianzadeseada = this.confianzaDeseada;
             double confiabilidad = confianzadeseada;
 
-            double lambda = partesoperando*(tiempoentrega*24/mtbf);
-
+            double lambda = (double)partesoperando*((double)tiempoentrega*24/(double)mtbf);
+            
             int j=0; boolean control = false; ArrayList res = new ArrayList(); boolean marca[] = null;
 
             while(!control){
@@ -631,7 +629,7 @@ public class VentanaBR extends javax.swing.JFrame {
     public double poisson(double Z, double Lam) {
         double Poiscdf = 0, auxPoiscdf = 0, auxZ = 0;
         if (Lam<=0) {
-		positivo();
+            positivo();
         } else if (Z<0) {
             Poiscdf=0;
         } else {

@@ -968,7 +968,7 @@ public class VentanaAR extends javax.swing.JFrame {
             }
             int indisponibilidad = consecuencia;
             int ndap;
-            float da[] = new float[12];
+            double da[] = new double[12];
 
             String post[] = new String[3];
 
@@ -976,9 +976,9 @@ public class VentanaAR extends javax.swing.JFrame {
             post[2] = ""+cp;
 
             switch (indisponibilidad) {
-                case 1: confianzaGlobal = 80; break;
-                case 2: confianzaGlobal = 95; break;
-                case 4: confianzaGlobal = (float) 99.9; break;
+                case 1: this.confianzaGlobal = 80; break;
+                case 2: this.confianzaGlobal = 95; break;
+                case 4: this.confianzaGlobal = (float) 99.9; break;
                 default: 
                     JOptionPane.showMessageDialog(null, "Error de indisponibilidad");
                 break;
@@ -987,51 +987,51 @@ public class VentanaAR extends javax.swing.JFrame {
             // SUMA DE LA DEMANDA ANUAL
             int sumaDemandaAnual = 0;
             sumaDemandaAnual+=parseInt(""+m1.getText());
-            da[0] = (float)parseInt(""+m1.getText());
+            da[0] = (double)parseInt(""+m1.getText());
             post[0] = ""+(float)parseInt(""+m1.getText());
 
             sumaDemandaAnual+=parseInt(""+m2.getText());
-            da[1] = (float)parseInt(""+m2.getText());
+            da[1] = (double)parseInt(""+m2.getText());
 
             sumaDemandaAnual+=parseInt(""+m3.getText());
-            da[2] = (float)parseInt(""+m3.getText());
+            da[2] = (double)parseInt(""+m3.getText());
 
             sumaDemandaAnual+=parseInt(""+m4.getText());
-            da[3] = (float)parseInt(""+m4.getText());
+            da[3] = (double)parseInt(""+m4.getText());
 
             sumaDemandaAnual+=parseInt(""+m5.getText());
-            da[4] = (float)parseInt(""+m5.getText());
+            da[4] = (double)parseInt(""+m5.getText());
 
             sumaDemandaAnual+=parseInt(""+m6.getText());
-            da[5] = (float)parseInt(""+m6.getText());
+            da[5] = (double)parseInt(""+m6.getText());
 
             sumaDemandaAnual+=parseInt(""+m7.getText());
-            da[6] = (float)parseInt(""+m7.getText());
+            da[6] = (double)parseInt(""+m7.getText());
 
             sumaDemandaAnual+=parseInt(""+m8.getText());
-            da[7] = (float)parseInt(""+m8.getText());
+            da[7] = (double)parseInt(""+m8.getText());
 
             sumaDemandaAnual+=parseInt(""+m9.getText());
-            da[8] = (float)parseInt(""+m9.getText());
+            da[8] = (double)parseInt(""+m9.getText());
 
             sumaDemandaAnual+=parseInt(""+m10.getText());
-            da[9] = (float)parseInt(""+m10.getText());
+            da[9] = (double)parseInt(""+m10.getText());
 
             sumaDemandaAnual+=parseInt(""+m11.getText());
-            da[10] = (float)parseInt(""+m11.getText());
+            da[10] = (double)parseInt(""+m11.getText());
 
             sumaDemandaAnual+=parseInt(""+m12.getText());
-            da[11] = (float)parseInt(""+m12.getText());
+            da[11] = (double)parseInt(""+m12.getText());
 
             // OBTENER TEXTO DE LOS TEXT FIELDS DE TIEMPO DE ENTREGA
             Component[] children = panelTiempoEntrega.getComponents();
-            for (int i=0;i<children.length;i++){
-                if (children[i] instanceof JTextField){
-                    String text = ((JTextField)children[i]).getText();
+            for (int i=1;i<=children.length;i++){
+                if (children[i-1] instanceof JTextField){
+                    String text = ((JTextField)children[i-1]).getText();
                     lineas++;
                     this.tiempoentrega += parseInt(text);
                     
-                    if(i == 0) post[2] = text;
+                    if(i == 1) post[2] = text;
                     else post[2] = post[2]+','+text;
                 }
             }
@@ -1042,26 +1042,21 @@ public class VentanaAR extends javax.swing.JFrame {
 
             ndap = criticidad(indisponibilidad, this.tiempoentrega );
 
-            float stockminimo = 0;
-            stockminimo = (float)(this.tiempoentrega*((double) sumaDemandaAnual/365));
-
-            float tpum = 0;
-            tpum = sumaDemandaAnual/12;
-            
-            float dap=0;
+            double stockminimo = (this.tiempoentrega*((double) sumaDemandaAnual/365));
+            double tpum = (double)sumaDemandaAnual/(double)12;
+            double dap=0;
 
             for (int i = 0; i < 12; i++) {
-                float auxDa = Math.abs((float)(da[i]-tpum));   
+                double auxDa = Math.abs((da[i]-tpum));   
                 da[i] = auxDa;
                 dap = dap + da[i];
             }
 
-            float auxDap = dap/12;
+            double auxDap = dap/12;
             dap = auxDap;
 
-            float stockseguridad = 0;
-            stockseguridad = (stockminimo*ndap*dap)/tpum;
-            float puntope = stockminimo + stockseguridad;
+            float stockseguridad = (float) ((stockminimo*ndap*dap)/tpum);
+            float puntope = (float) (stockminimo + stockseguridad);
             float nivelser = 100 - ((100-this.confianzaGlobal)*this.tiempoentrega*sumaDemandaAnual)/(cp*365);
 
             demandaAnual.setText(""+(int)sumaDemandaAnual);
@@ -1081,10 +1076,10 @@ public class VentanaAR extends javax.swing.JFrame {
 
             float nsmax = (float) (100 - ((100-99.99)*sumaDemandaAnual*this.tiempoentrega)/(cp*365));
             // GraficoNivelServicioNC nivelServicioNC = new GraficoNivelServicioNC(nsmin, nsmax, this.confianzaGlobal, nivelser);
-
+            
             // Grafico Nivel de Servicio en función al tiempo de entrega
             // GraficoNivelServicioTiempoEntrega graficoTE = new GraficoNivelServicioTiempoEntrega(ppmin, ppmax, nivelser, this.tiempoentrega);
-            ResultadosARPDP resultados = new ResultadosARPDP(puntope, nivelser, ppmin, ppmax, nsmin, nsmax,this.confianzaGlobal, this.tiempoentrega);
+            ResultadosARPDP resultados = new ResultadosARPDP(puntope, nivelser, ppmin, ppmax, nsmin, nsmax,this.confianzaGlobal, this.tiempoentrega, stockminimo, dap, tpum, sumaDemandaAnual, cp);
         }
         
         return false;
