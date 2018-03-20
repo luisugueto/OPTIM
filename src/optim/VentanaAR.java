@@ -47,6 +47,18 @@ public class VentanaAR extends javax.swing.JFrame {
         demandaAnual.setEditable(false);      
         this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         this.setLocationRelativeTo(null);
+        procesarPunto.setBackground(Color.decode("#3e8f3e"));
+        procesarPunto.setForeground(Color.white);
+        jButton1.setBackground(Color.decode("#3e8f3e"));
+        jButton1.setForeground(Color.white);
+        clearPunto.setBackground(Color.decode("#ee4444"));
+        clearPunto.setForeground(Color.white);
+        jButton2.setBackground(Color.decode("#ee4444"));
+        jButton2.setForeground(Color.white);
+        procesarCantidad.setBackground(Color.decode("#3e8f3e"));
+        procesarCantidad.setForeground(Color.white);
+        clearCantidad.setBackground(Color.decode("#ee4444"));
+        clearCantidad.setForeground(Color.white);
     }
 
     /**
@@ -1222,6 +1234,15 @@ public class VentanaAR extends javax.swing.JFrame {
 
     private void clearPuntoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearPuntoActionPerformed
         // TODO add your handling code here:
+        clearFields();      
+    }//GEN-LAST:event_clearPuntoActionPerformed
+    
+    private void clearCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearCantidadActionPerformed
+        // TODO add your handling code here:
+        clearFields();
+    }//GEN-LAST:event_clearCantidadActionPerformed
+
+    private void clearFields(){
         m1.setText("");
         m2.setText("");
         m3.setText("");
@@ -1246,23 +1267,15 @@ public class VentanaAR extends javax.swing.JFrame {
         tiempoentrega = 0;
         confianzaGlobal = 0;
         
-        criticidadCantidad.setBackground(new Color(240, 240, 240));
-        criticidadLabel.setText("CRITICIDAD");
-        
-        
-    }//GEN-LAST:event_clearPuntoActionPerformed
-
-    private void clearCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearCantidadActionPerformed
-        // TODO add your handling code here:
         DEMANDA_TOTAL_ANUAL.setText("");
         COSTO_UNITARIO.setText("");
         COSTO_PROCESAMIENTO_PEDIDO.setText("");
         PORCENTAJE_COSTO.setText("");
         
         criticidadCantidad.setBackground(new Color(240, 240, 240));
-        criticidadLabel.setText("CRITICIDAD");
-    }//GEN-LAST:event_clearCantidadActionPerformed
-
+        criticidadLabel.setText("CRITICIDAD"); 
+    }
+    
     private void procesarCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_procesarCantidadActionPerformed
         // TODO add your handling code here:
         graficarCEP();

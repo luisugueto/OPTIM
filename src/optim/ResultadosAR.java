@@ -6,6 +6,7 @@
 package optim;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -68,12 +69,7 @@ public class ResultadosAR extends javax.swing.JFrame {
         int max = 0;
         for (int K = val+1; K >= val-8; K--) {
 			if (K==1) max = CT.get(K).intValue();
-            
-		  //if (CC[Q] == null || CM[Q] == null || CT[Q] == null) {
-		  	
-		  	//break;
-		  //}
-            
+   
             // AGREGANDO COLUMNAS TABLA
             model.addRow(new Object[]{K+1, Math.round((double)CC.get(K) * 100d) / 100d, Math.round((double)CM.get(K) * 100d) / 100d, Math.round((double)CT.get(K) * 100d) / 100d});
             numRows++;
@@ -87,6 +83,8 @@ public class ResultadosAR extends javax.swing.JFrame {
         scrollPane.setBounds(20, 350, 450, 180);
         panelResultadosBR.add(scrollPane, BorderLayout.CENTER);
         
+        jButton1.setBackground(Color.decode("#3e8f3e"));
+        jButton1.setForeground(Color.white);
     }
 
     /**

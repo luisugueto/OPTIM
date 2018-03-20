@@ -5,6 +5,7 @@
  */
 package optim;
 
+import java.awt.Color;
 import javax.swing.WindowConstants;
 
 /**
@@ -55,6 +56,13 @@ public class ResultadosARPDP extends javax.swing.JFrame {
         
         puntopedido.setText(""+Math.round(puntope * 100d) / 100d);
         nivelservicio.setText(""+Math.round(nivelser * 100d) / 100d);
+        jButton1.setBackground(Color.decode("#3e8f3e"));
+        jButton1.setForeground(Color.white);
+        jButton2.setBackground(Color.decode("#3e8f3e"));
+        jButton2.setForeground(Color.white);
+        jButton3.setBackground(Color.decode("#3e8f3e"));
+        jButton3.setForeground(Color.white);
+        
         this.setVisible(true);
     }
 

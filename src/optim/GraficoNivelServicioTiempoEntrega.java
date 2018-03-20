@@ -5,6 +5,9 @@
  */
 package optim;
 
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Shape;
 import javax.swing.JFrame;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
@@ -55,10 +58,38 @@ public class GraficoNivelServicioTiempoEntrega extends JFrame{
                 false
         );
         
+        chart.setBackgroundPaint(Color.WHITE);
+        
         XYPlot xyPlot = (XYPlot) chart.getPlot();
+        xyPlot.setBackgroundPaint(Color.WHITE);
+        xyPlot.setDomainGridlinePaint(Color.DARK_GRAY);
+        xyPlot.setRangeGridlinePaint(Color.DARK_GRAY);
         xyPlot.setDomainCrosshairVisible(true);
         xyPlot.setRangeCrosshairVisible(false);
         XYLineAndShapeRenderer r = (XYLineAndShapeRenderer) xyPlot.getRenderer();
+        xyPlot.setRenderer(new XYLineAndShapeRenderer(true, true) {
+
+            @Override
+            public Shape getItemShape(int row, int col) {
+                if (col == tiempoentrega-1) {
+                    return ShapeUtilities.createDiagonalCross(5, 2);
+                }
+                /* else {
+                    return super.getItemShape(0, 0);
+                } */
+                
+                return ShapeUtilities.createDiagonalCross(0, 0);
+            }
+        });
+        
+        XYPlot plot = chart.getXYPlot();
+        // here we change the line size
+        int seriesCount = plot.getSeriesCount();
+        
+        for (int i = 0; i < seriesCount; i++) {
+            plot.getRenderer().setSeriesStroke(i, new BasicStroke(3));
+        }
+        
         r.setBaseItemLabelsVisible(true);
         r.setBaseItemLabelGenerator(new LegendXYItemLabelGenerator(xyPlot.getLegendItems(), tiempoentrega));
 

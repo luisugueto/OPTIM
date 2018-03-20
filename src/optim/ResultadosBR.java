@@ -6,6 +6,7 @@
 package optim;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -68,9 +69,14 @@ public class ResultadosBR extends javax.swing.JFrame {
 
         //Add the scroll pane to this window.
         panelResultadosBR.add(scrollPane, BorderLayout.CENTER);
-            
+        
+        jButton1.setBackground(Color.decode("#3e8f3e"));
+        jButton1.setForeground(Color.white);
+        
         this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         this.setVisible(true);
+        
+        
     }
     /**
      * This method is called from within the constructor to initialize the form.
