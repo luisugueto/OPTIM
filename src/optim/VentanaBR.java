@@ -8,6 +8,7 @@ package optim;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import static java.lang.Float.parseFloat;
 import static java.lang.Integer.parseInt;
 import static java.lang.Math.abs;
@@ -16,6 +17,7 @@ import static java.lang.Math.log;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -31,18 +33,44 @@ import javax.swing.table.DefaultTableModel;
  */
 public class VentanaBR extends javax.swing.JFrame {
     int pos = 0, minimo = 0, maximo = 0;
-    private double confianzaDeseada = 0, confianzadatosingresados = 0;
+    private double confianzaDeseada = 0, confianzadatosingresados = 0, confianzare;
+    private ArrayList poissoni, poissona;
+    private GraficaBR grafica = null;
+    
+    private ArrayList<GraficaBR> listGrafica = new ArrayList<GraficaBR>();
+    
+    private int graficaNumber = 0;
+    private DefaultTableModel model = new DefaultTableModel(); 
+    private JTable table = null; 
     /**
      * Creates new form VentanaAR
      */
     public VentanaBR() {
         initComponents();
+        setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/imagenes/logo-trans-small.png")));
         this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         this.setLocationRelativeTo(null);
         procesar.setBackground(Color.decode("#3e8f3e"));
         procesar.setForeground(Color.white);
         clear.setBackground(Color.decode("#ee4444"));
         clear.setForeground(Color.white);
+        jButton2.setBackground(Color.decode("#3e8f3e"));
+        jButton2.setForeground(Color.white);
+        jButton2.setEnabled(false);
+        
+        table = new JTable(model);
+        table.setBounds(20, 20, 300, 400);
+
+        // COLUMNAS TABLA
+        model.addColumn("N° Repuestos"); 
+        model.addColumn("Nivel de Confianza");
+        
+        //Create the scroll pane and add the table to it. 
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBounds(40, 180, 400, 180);
+
+        //Add the scroll pane to this window.
+        panelResultadosBR1.add(scrollPane, BorderLayout.CENTER);
     }
 
     /**
@@ -71,10 +99,22 @@ public class VentanaBR extends javax.swing.JFrame {
         tiempoEntrega = new javax.swing.JTextField();
         clear = new javax.swing.JButton();
         procesar = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel29 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        panelResultadosBR1 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        nivelDeseado1 = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        nivelConfianzaDatos1 = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        stockMinimo1 = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        stockMaximo1 = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(600, 250));
-        setPreferredSize(new java.awt.Dimension(667, 300));
         setResizable(false);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -192,7 +232,7 @@ public class VentanaBR extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel23)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -234,22 +274,113 @@ public class VentanaBR extends javax.swing.JFrame {
             }
         });
 
+        jLabel29.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel29.setText("Resultados");
+
+        panelResultadosBR1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel6.setText("Nivel de Confianza Deseado:");
+
+        nivelDeseado1.setEditable(false);
+        nivelDeseado1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nivelDeseado1ActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("Nivel de confianza para los datos ingresados:");
+
+        nivelConfianzaDatos1.setEditable(false);
+
+        jLabel8.setText("Stock mínimo recomendado:");
+
+        stockMinimo1.setEditable(false);
+
+        jLabel9.setText("Stock maximo recomendado:");
+
+        stockMaximo1.setEditable(false);
+
+        jButton2.setText("Ver Gráfica Confiabilidad por cantidad de producto");
+        jButton2.setToolTipText("Ver Gráfica (Confiabilidad por cantidad de producto)");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelResultadosBR1Layout = new javax.swing.GroupLayout(panelResultadosBR1);
+        panelResultadosBR1.setLayout(panelResultadosBR1Layout);
+        panelResultadosBR1Layout.setHorizontalGroup(
+            panelResultadosBR1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelResultadosBR1Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(panelResultadosBR1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(38, 38, 38)
+                .addGroup(panelResultadosBR1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(stockMinimo1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
+                    .addComponent(nivelConfianzaDatos1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(nivelDeseado1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(stockMaximo1))
+                .addContainerGap(79, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelResultadosBR1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelResultadosBR1Layout.setVerticalGroup(
+            panelResultadosBR1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelResultadosBR1Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(panelResultadosBR1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nivelDeseado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addGap(18, 18, 18)
+                .addGroup(panelResultadosBR1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(nivelConfianzaDatos1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelResultadosBR1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(stockMinimo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelResultadosBR1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(stockMaximo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 218, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
+        );
+
+        jScrollPane1.setViewportView(panelResultadosBR1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(procesar)
                         .addGap(18, 18, 18)
                         .addComponent(clear)
-                        .addGap(108, 108, 108)))
+                        .addGap(108, 108, 108))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel29)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -261,10 +392,16 @@ public class VentanaBR extends javax.swing.JFrame {
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(clear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(procesar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(12, 12, 12)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel29)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
                         .addContainerGap())))
         );
 
@@ -277,6 +414,16 @@ public class VentanaBR extends javax.swing.JFrame {
 
     private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
         // TODO add your handling code here:
+        if(this.grafica != null && this.grafica.getVentana().isVisible()) {
+            //this.grafica.closeJFrame();
+            graficaNumber = 0;
+            jButton2.setEnabled(false);
+            listGrafica.forEach((a)->a.closeJFrame());
+        }
+        
+        if(this.table != null)
+            this.table.setVisible(false);
+        
         partesIgualesOperandoSimult.setText("");
         mttf.setText("");
         tiempoEntrega.setText("");
@@ -329,6 +476,25 @@ public class VentanaBR extends javax.swing.JFrame {
     private void mttfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mttfActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_mttfActionPerformed
+
+    private void nivelDeseado1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nivelDeseado1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nivelDeseado1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:    
+        graficaNumber = 1;
+        
+        if(graficaNumber == 1){
+            //jButton2.setEnabled(false);
+            this.grafica = new GraficaBR(this.poissoni, this.poissona, 0, this.confianzare);
+            listGrafica.add(grafica);
+        }
+        else
+            this.grafica = new GraficaBR(this.poissoni, this.poissona, 0, this.confianzare);
+            //jButton2.setEnabled(true);
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -409,62 +575,67 @@ public class VentanaBR extends javax.swing.JFrame {
     }
     
     public boolean procesarBR () {
-        if (validarBR()) {
-            int partesoperando = parseInt(partesIgualesOperandoSimult.getText());
-            int mtbf = parseInt(mttf.getText());
-            int tiempoentrega = parseInt(tiempoEntrega.getText());
-            int consecuencia = 0;
+        try{
+            if (validarBR()) {
+                int partesoperando = parseInt(partesIgualesOperandoSimult.getText());
+                int mtbf = parseInt(mttf.getText());
+                int tiempoentrega = parseInt(tiempoEntrega.getText());
+                int consecuencia = 0;
 
-            if (partesoperando < 0 || mtbf < 0 || tiempoentrega < 0) {
-                JOptionPane.showMessageDialog(null, "Todos los campos deben ser positivos");
+                if (partesoperando < 0 || mtbf < 0 || tiempoentrega < 0) {
+                    JOptionPane.showMessageDialog(null, "Todos los campos deben ser positivos");
+                }
+                if(consecuenciaIndisponibilidad.getSelectedItem().toString().equalsIgnoreCase("No afecta la producción"))
+                {
+                    consecuencia = 1;
+                }
+                if(consecuenciaIndisponibilidad.getSelectedItem().toString().equalsIgnoreCase("Afecta parcialmente la producción"))
+                {
+                    consecuencia = 3;
+                }
+                if(consecuenciaIndisponibilidad.getSelectedItem().toString().equalsIgnoreCase("Paraliza totalmente la producción"))
+                {
+                    consecuencia = 5;
+                }
+
+                int indisponibilidad = consecuencia;
+                int crit = criticidad(indisponibilidad, tiempoentrega);
+                int confianzadeseada;
+
+                switch (crit) {
+                    case 1: confianzadeseada = 80; break;
+                    case 3: confianzadeseada = 90; break;
+                    case 5: confianzadeseada = 99; break;
+                    default: confianzadeseada = 80; break;
+                }
+
+                if (confianzadeseada > 100 || confianzadeseada < 0) {
+                    JOptionPane.showMessageDialog(null, "La confianza deseada debe ser un valor entre 0 y 100.");
+                    return false;
+                }
+
+                double lambda = (double)partesoperando*((double)(tiempoentrega*24)/(double)mtbf);
+                ArrayList resultados = PoissonInverso(confianzadeseada, lambda);
+
+                int repuestosnecesarios = (int) resultados.get(0);
+                ArrayList array = (ArrayList) resultados.get(1);
+
+                double confianzarep = (double)array.get(array.size()-1)*100; 
+
+                float division = repuestosnecesarios/10;
+                int ejex = (int) ((division+1)*10);
+
+                this.confianzaDeseada = confianzadeseada;
+                this.minimo = repuestosnecesarios;
+                this.confianzadatosingresados = confianzarep;
+
+                uptcrit(crit);
+
+                return true;
             }
-            if(consecuenciaIndisponibilidad.getSelectedItem().toString().equalsIgnoreCase("No afecta la producción"))
-            {
-                consecuencia = 1;
-            }
-            if(consecuenciaIndisponibilidad.getSelectedItem().toString().equalsIgnoreCase("Afecta parcialmente la producción"))
-            {
-                consecuencia = 3;
-            }
-            if(consecuenciaIndisponibilidad.getSelectedItem().toString().equalsIgnoreCase("Paraliza totalmente la producción"))
-            {
-                consecuencia = 5;
-            }
-
-            int indisponibilidad = consecuencia;
-            int crit = criticidad(indisponibilidad, tiempoentrega);
-            int confianzadeseada;
-
-            switch (crit) {
-                case 1: confianzadeseada = 80; break;
-                case 3: confianzadeseada = 90; break;
-                case 5: confianzadeseada = 99; break;
-                default: confianzadeseada = 80; break;
-            }
-
-            if (confianzadeseada > 100 || confianzadeseada < 0) {
-                JOptionPane.showMessageDialog(null, "La confianza deseada debe ser un valor entre 0 y 100.");
-                return false;
-            }
-
-            double lambda = (double)partesoperando*((double)(tiempoentrega*24)/(double)mtbf);
-            ArrayList resultados = PoissonInverso(confianzadeseada, lambda);
-
-            int repuestosnecesarios = (int) resultados.get(0);
-            ArrayList array = (ArrayList) resultados.get(1);
-            
-            double confianzarep = (double)array.get(array.size()-1)*100; 
-            
-            float division = repuestosnecesarios/10;
-            int ejex = (int) ((division+1)*10);
-
-            this.confianzaDeseada = confianzadeseada;
-            this.minimo = repuestosnecesarios;
-            this.confianzadatosingresados = confianzarep;
-
-            uptcrit(crit);
-            
-            return true;
+        }
+        catch (Exception e) { 
+            JOptionPane.showMessageDialog(null, e.getClass().getName() + ": " + e.getMessage());   
         }
         return false;
     }
@@ -491,65 +662,98 @@ public class VentanaBR extends javax.swing.JFrame {
     }
     
     public void graficarBR () {
-        
-        if(procesarBR()){
-
-            int partesoperando = parseInt(partesIgualesOperandoSimult.getText());
-            int mtbf = parseInt(mttf.getText());
-            int tiempoentrega = parseInt(tiempoEntrega.getText());
-            double confianzadeseada = this.confianzaDeseada;
-            double confiabilidad = confianzadeseada;
-
-            double lambda = (double)partesoperando*((double)tiempoentrega*24/(double)mtbf);
-            
-            int j=0; boolean control = false; ArrayList res = new ArrayList(); boolean marca[] = null;
-
-            while(!control){
-                res.add(j, poisson(j, lambda));
-                if (confianzadeseada/100 <= (double)res.get(j)) {
-                    control = true;
-                } else {
-                    j++;
+        try{
+            if(procesarBR()){
+                if(graficaNumber == 1){
+                    //this.grafica.closeJFrame();
+                    listGrafica.forEach((a)->a.closeJFrame());
                 }
+                int partesoperando = parseInt(partesIgualesOperandoSimult.getText());
+                int mtbf = parseInt(mttf.getText());
+                int tiempoentrega = parseInt(tiempoEntrega.getText());
+                double confianzadeseada = this.confianzaDeseada;
+                double confiabilidad = confianzadeseada;
+
+                double lambda = (double)partesoperando*((double)tiempoentrega*24/(double)mtbf);
+
+                int j=0; boolean control = false; ArrayList res = new ArrayList(); boolean marca[] = null;
+
+                while(!control){
+                    res.add(j, poisson(j, lambda));
+                    if (confianzadeseada/100 <= (double)res.get(j)) {
+                        control = true;
+                    } else {
+                        j++;
+                    }
+                }
+
+                int repuestosnecesarios = j;
+                double confianzarep = (double)res.get(j)*100; 
+                this.confianzare = confianzarep;
+                double division = repuestosnecesarios/10;
+                int ejex = (int) ((division+1)*10);
+
+                int min = 0, max = 100, recomendado=0;
+                ArrayList<Integer> XV = new ArrayList<Integer>();
+                ArrayList<Double> poissoni = new ArrayList<Double>();
+                ArrayList<Double> poissona = new ArrayList<Double>();
+
+                for (int i = 0; i <= ejex; i++) {
+
+                    XV.add(i);
+                    poissoni.add(PoissonTerm(lambda, i)*100);
+
+                    if (i <= repuestosnecesarios) poissona.add((double)res.get(i)*100);
+                    else {
+                        poissona.add((double)poisson(i, lambda)*100);
+                    }
+
+
+                };
+
+                if (recomendado == 0) {
+                    recomendado = ejex;
+                };
+
+                int m = 10-(ejex - repuestosnecesarios);
+                this.poissoni = poissoni;
+                this.poissona = poissona;
+
+                int neces = this.minimo;
+                neces++;
+                this.maximo = neces;
+
+                nivelDeseado1.setText(""+this.confianzaDeseada);
+                nivelConfianzaDatos1.setText(""+Math.round(this.confianzadatosingresados * 100d) / 100d); 
+                stockMinimo1.setText(""+this.minimo);
+                stockMaximo1.setText(""+this.maximo);
+
+                if(this.table != null)
+                {
+                    for( int i = model.getRowCount() - 1; i >= 0; i-- )
+                    {
+                        model.removeRow(i);
+                    }
+                }
+                
+                int numRows = 0;
+                for (int i = ejex; i >= repuestosnecesarios-m; i--) {
+                    model.addRow(new Object[]{i, Math.round((double)poissona.get(i) * 100d) / 100d });
+                    numRows++;
+                    if (i == repuestosnecesarios) {
+                        table.setRowSelectionInterval(numRows-1, numRows-1);
+                   }
+                }
+               
+                table.setVisible(true);
+                jButton2.setEnabled(true);
+                //ResultadosBR resultadosFrame = new ResultadosBR(this.confianzaDeseada, this.confianzadatosingresados, this.minimo, this.maximo, poissona, repuestosnecesarios, m, ejex, poissoni, confianzarep);
+
+                //GraficaBR grafica = new GraficaBR(poissoni, poissona, 0,confianzarep);
             }
-
-            int repuestosnecesarios = j;
-            double confianzarep = (double)res.get(j)*100; 
-            double division = repuestosnecesarios/10;
-            int ejex = (int) ((division+1)*10);
-
-            int min = 0, max = 100, recomendado=0;
-            ArrayList<Integer> XV = new ArrayList<Integer>();
-            ArrayList<Double> poissoni = new ArrayList<Double>();
-            ArrayList<Double> poissona = new ArrayList<Double>();
-            
-            for (int i = 0; i <= ejex; i++) {
-
-                XV.add(i);
-                poissoni.add(PoissonTerm(lambda, i)*100);
-
-                if (i <= repuestosnecesarios) poissona.add((double)res.get(i)*100);
-                else {
-                    poissona.add((double)poisson(i, lambda)*100);
-                }
-
-              
-            };
-
-            if (recomendado == 0) {
-                recomendado = ejex;
-            };
-            
-            int m = 10-(ejex - repuestosnecesarios);
-            
-
-            int neces = this.minimo;
-            neces++;
-            this.maximo = neces;
-            
-            ResultadosBR resultadosFrame = new ResultadosBR(this.confianzaDeseada, this.confianzadatosingresados, this.minimo, this.maximo, poissona, repuestosnecesarios, m, ejex, poissoni, confianzarep);
-            
-            //GraficaBR grafica = new GraficaBR(poissoni, poissona, 0,confianzarep);
+        }
+        catch (Exception e) { 
+            JOptionPane.showMessageDialog(null, e.getClass().getName() + ": " + e.getMessage());   
         }
     }
 
@@ -701,19 +905,32 @@ public class VentanaBR extends javax.swing.JFrame {
     private javax.swing.JButton clear;
     private javax.swing.JComboBox<String> consecuenciaIndisponibilidad;
     private javax.swing.JLabel criticidadLabel;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JTextField mttf;
+    private javax.swing.JTextField nivelConfianzaDatos1;
+    private javax.swing.JTextField nivelDeseado1;
     private javax.swing.JPanel panelCriticidad;
+    private javax.swing.JPanel panelResultadosBR1;
     private javax.swing.JTextField partesIgualesOperandoSimult;
     private javax.swing.JButton procesar;
+    private javax.swing.JTextField stockMaximo1;
+    private javax.swing.JTextField stockMinimo1;
     private javax.swing.JTextField tiempoEntrega;
     // End of variables declaration//GEN-END:variables
 }

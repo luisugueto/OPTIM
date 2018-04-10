@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
+import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItemCollection;
 import org.jfree.chart.axis.NumberAxis;
@@ -29,6 +30,7 @@ import org.jfree.util.ShapeUtilities;
  * ugueto.luis19@gmail.com
  */
 public class GraficoNivelServicioNC extends JFrame{
+    private ChartFrame ventanaa;
     
     public GraficoNivelServicioNC(float nsmin, float nsmax, float confianza, float nivelservicio, double tiempoentrega, double sumaDemandaAnual, int cp){
         XYSeries nc = new XYSeries("");
@@ -106,12 +108,27 @@ public class GraficoNivelServicioNC extends JFrame{
         range.setRange(nsmin, nsmax+1);
         
         ChartFrame ventana = new ChartFrame("Puntos de pedido en función del nivel de confianza", chart);
+        ChartPanel chartPanel = new ChartPanel(chart); 
+        chartPanel.setPopupMenu(null); 
+        
+        chartPanel.setDomainZoomable(false);
+        chartPanel.setRangeZoomable(false);
+        ventana.add(chartPanel);
+        
         ventana.pack();
-        ventana.setSize(500, 500);
+        
         ventana.setResizable(false);
         ventana.setLocationRelativeTo(null);
         ventana.setVisible(true);
+        ventanaa = ventana;
+    }
     
+    public void closeJFrame(){
+        ventanaa.dispose();
+    }
+    
+    public ChartFrame getVentana(){
+        return ventanaa;
     }
 
     private static class LegendXYItemLabelGenerator implements XYItemLabelGenerator {

@@ -17,8 +17,15 @@ public class OPTIM {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        VentanaInicial ventana = new VentanaInicial();
-        ventana.show();
+        Login login = new Login();
+        login.show();
+        //VentanaInicial ventana = new VentanaInicial();
+        //ventana.show();
+    }
+    
+    private void imprimirExcepcion(Exception e) {
+        System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+        System.out.println();
     }
     
 }

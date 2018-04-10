@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
+import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
@@ -23,6 +24,8 @@ import org.jfree.data.xy.XYSeriesCollection;
  * ugueto.luis19@gmail.com
  */
 public class GraficaBR extends JFrame{
+    
+    private ChartFrame ventanaa;
     
     public GraficaBR(ArrayList poissoni, ArrayList poissona, double minimoStock, double nivelConfianza){
         XYSeries pi = new XYSeries("Probabilidad Individual");
@@ -73,11 +76,28 @@ public class GraficaBR extends JFrame{
         xyPlot.setDomainGridlinePaint(Color.DARK_GRAY);
         xyPlot.setRangeGridlinePaint(Color.DARK_GRAY);
         
-        ChartFrame ventana = new ChartFrame("Confiabilidad por cantidad de producto", chart);
+        ChartFrame ventana = new ChartFrame("Confiabilidad por cantidad de producto", null);
+        ChartPanel chartPanel = new ChartPanel(chart); 
+        chartPanel.setPopupMenu(null); 
+        
+        chartPanel.setDomainZoomable(false);
+        chartPanel.setRangeZoomable(false);
+        ventana.add(chartPanel);
+        
         ventana.pack();
-        ventana.setSize(500, 500);
         ventana.setResizable(false);
         ventana.setLocationRelativeTo(null);
         ventana.setVisible(true);
+        ventanaa = ventana;
     }
+    
+    public void closeJFrame(){
+        ventanaa.dispose();
+    }
+    
+    public ChartFrame getVentana(){
+        return ventanaa;
+    }
+    
+    
 }

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
+import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
@@ -26,7 +27,7 @@ import org.jfree.ui.RectangleEdge;
  * ugueto.luis19@gmail.com
  */
 public class GraficaCEP extends JFrame{
-    
+    private ChartFrame ventanaa;
     public GraficaCEP(ArrayList CC, ArrayList CM, ArrayList CT, double XN){
         
         XYSeries cc = new XYSeries("(CC) Costo de Compra");
@@ -85,10 +86,25 @@ public class GraficaCEP extends JFrame{
         legend.setPosition(RectangleEdge.RIGHT);*/
 
         ChartFrame ventana = new ChartFrame("Gráfico de Cantidad de Pedido", chart);
+        ChartPanel chartPanel = new ChartPanel(chart); 
+        chartPanel.setPopupMenu(null); 
+        
+        chartPanel.setDomainZoomable(false);
+        chartPanel.setRangeZoomable(false);
+        ventana.add(chartPanel);
+        
         ventana.pack();
-        ventana.setSize(500, 500);
         ventana.setResizable(false);
         ventana.setLocationRelativeTo(null);
         ventana.setVisible(true);
+        ventanaa = ventana;
     }   
+    
+    public void closeJFrame(){
+        ventanaa.dispose();
+    }
+    
+    public ChartFrame getVentana(){
+        return ventanaa;
+    }
 }

@@ -11,6 +11,7 @@ import java.awt.Shape;
 import javax.swing.JFrame;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
+import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.LegendItemCollection;
 import org.jfree.chart.axis.NumberAxis;
@@ -30,7 +31,9 @@ import org.jfree.util.ShapeUtilities;
  * ugueto.luis19@gmail.com
  */
 public class GraficoNivelServicioTiempoEntrega extends JFrame{
-        
+     
+    private ChartFrame ventanaa;
+    
     public GraficoNivelServicioTiempoEntrega(double ppmin, double ppmax, float nivelservicio, float tiempoentrega, float confianza, double sumaDemandaAnual, int cp){
         int limite = (int) ((tiempoentrega/10+1)*10);
         XYSeries nc = new XYSeries("");
@@ -67,20 +70,20 @@ public class GraficoNivelServicioTiempoEntrega extends JFrame{
         xyPlot.setDomainCrosshairVisible(true);
         xyPlot.setRangeCrosshairVisible(false);
         XYLineAndShapeRenderer r = (XYLineAndShapeRenderer) xyPlot.getRenderer();
-        xyPlot.setRenderer(new XYLineAndShapeRenderer(true, true) {
+        /*xyPlot.setRenderer(new XYLineAndShapeRenderer(true, true) {
 
             @Override
             public Shape getItemShape(int row, int col) {
                 if (col == tiempoentrega-1) {
                     return ShapeUtilities.createDiagonalCross(5, 2);
                 }
-                /* else {
-                    return super.getItemShape(0, 0);
-                } */
+                // else {
+                 //   return super.getItemShape(0, 0);
+                //} 
                 
                 return ShapeUtilities.createDiagonalCross(0, 0);
             }
-        });
+        }); */
         
         XYPlot plot = chart.getXYPlot();
         // here we change the line size
@@ -90,6 +93,8 @@ public class GraficoNivelServicioTiempoEntrega extends JFrame{
             plot.getRenderer().setSeriesStroke(i, new BasicStroke(3));
         }
         
+        r.setSeriesShape(0, ShapeUtilities.createDiamond(5));
+        r.setSeriesShapesVisible(0, true);
         r.setBaseItemLabelsVisible(true);
         r.setBaseItemLabelGenerator(new LegendXYItemLabelGenerator(xyPlot.getLegendItems(), tiempoentrega));
 
@@ -101,13 +106,29 @@ public class GraficoNivelServicioTiempoEntrega extends JFrame{
         range.setRange(nsmin, nsmax);
         
         ChartFrame ventana = new ChartFrame("Nivel de servicio en función del tiempo de entrega", chart);
+        
+        ChartPanel chartPanel = new ChartPanel(chart); 
+        chartPanel.setPopupMenu(null); 
+        
+        chartPanel.setDomainZoomable(false);
+        chartPanel.setRangeZoomable(false);
+        ventana.add(chartPanel);
+        
         ventana.pack();
-        ventana.setSize(500, 500);
+        
         ventana.setResizable(false);
         ventana.setLocationRelativeTo(null);
         ventana.setVisible(true);
+        ventanaa = ventana;
+    }
     
-        }
+    public void closeJFrame(){
+        ventanaa.dispose();
+    }
+    
+    public ChartFrame getVentana(){
+        return ventanaa;
+    }
 
     private static class LegendXYItemLabelGenerator implements XYItemLabelGenerator {
 
@@ -119,7 +140,7 @@ public class GraficoNivelServicioTiempoEntrega extends JFrame{
         @Override
          public String generateLabel(XYDataset dataset, int series, int item) {             
              if(tiempoentrega == (float)item ){
-                 return ""+item+" días";
+                 return "Nivel de servicio para los valores ingresados";
              }
              return "";
         }

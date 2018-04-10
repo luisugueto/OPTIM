@@ -67,9 +67,28 @@ public class ResultadosAR extends javax.swing.JFrame {
         
         int numRows = 0;
         int max = 0;
-        for (int K = val+1; K >= val-8; K--) {
+        
+        int valB = 0;
+        
+        if(val == 1){
+            valB = val-1;
+        }
+        if(val == 2){
+            valB = val-2;
+        }
+        if(val == 3){
+            valB = val-3;
+        }
+        if(val == 4){
+            valB = val-4;
+        }
+        if(val == 5){
+            valB = val-5;
+        }
+        
+        for (int K = val+5; K >= valB; K--) {
 			if (K==1) max = CT.get(K).intValue();
-   
+            
             // AGREGANDO COLUMNAS TABLA
             model.addRow(new Object[]{K+1, Math.round((double)CC.get(K) * 100d) / 100d, Math.round((double)CM.get(K) * 100d) / 100d, Math.round((double)CT.get(K) * 100d) / 100d});
             numRows++;
@@ -146,7 +165,7 @@ public class ResultadosAR extends javax.swing.JFrame {
 
         costoMantenerInventario.setEditable(false);
 
-        jButton1.setText("Ver Gráfica (CCP)");
+        jButton1.setText("Ver Gráfica Cantidad de Pedido");
         jButton1.setToolTipText("Ver Gráfica (Confiabilidad por cantidad de producto)");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -181,7 +200,7 @@ public class ResultadosAR extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(jLabel7)
                     .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
                 .addGroup(panelResultadosBRLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(nivelserviciocep)
                     .addComponent(costoTotalAnual)
@@ -192,9 +211,9 @@ public class ResultadosAR extends javax.swing.JFrame {
                     .addComponent(costoMantenerInventario, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelResultadosBRLayout.createSequentialGroup()
-                .addContainerGap(169, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(166, 166, 166))
+                .addContainerGap(178, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(138, 138, 138))
         );
         panelResultadosBRLayout.setVerticalGroup(
             panelResultadosBRLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,7 +246,7 @@ public class ResultadosAR extends javax.swing.JFrame {
                 .addGroup(panelResultadosBRLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nivelserviciocep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 303, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 313, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27))
         );
@@ -257,7 +276,7 @@ public class ResultadosAR extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE))
         );
 
         pack();

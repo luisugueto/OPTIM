@@ -97,21 +97,21 @@ public class ResultadosARPDP extends javax.swing.JFrame {
 
         jLabel30.setText("Punto de Pedido:");
 
-        jButton1.setText("Ver Gráfica (PDNC)");
+        jButton1.setText("Ver Gráfica Nivel de servicio en función del nivel de confianza");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Ver Gráfica (NSNC)");
+        jButton2.setText("Ver Gráfica Puntos de pedido en función del nivel de confianza");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Ver Gráfica (NSTE)");
+        jButton3.setText("Ver Gráfica Nivel de servicio en función del tiempo de entrega");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -144,9 +144,8 @@ public class ResultadosARPDP extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(9, 9, 9)
                                 .addComponent(jButton2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
                                 .addComponent(jButton3)
                                 .addGap(25, 25, 25))
                             .addGroup(layout.createSequentialGroup()
